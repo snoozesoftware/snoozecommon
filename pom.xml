@@ -23,7 +23,7 @@
 	<repository>
         	<id>release-repository</id>
 		<name>INRIA Snooze Releases</name>
-        	<url>dav:https://wevdav.irisa.fr/snooze.inria.fr/htdocs/maven/releases</url>
+        	<url>dav:https://webdav.irisa.fr/snooze.inria.fr/htdocs/maven/releases</url>
     	</repository>
     	<snapshotRepository>
         	<id>snapshot-repository</id>
