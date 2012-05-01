@@ -2,11 +2,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.inria.myriads</groupId>
   <artifactId>snoozecommon</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>snoozecommon</name>
   <url>http://snooze.inria.fr</url>
-  <description>Shared code between Snooze client and node. </description>
+  <description> Shared code between Snooze client and node. </description>
 
   <licenses>
 	<license>
@@ -21,21 +21,21 @@
 
   <distributionManagement>
 	<repository>
-        	<id>release-repository</id>
-		<name>INRIA Snooze Releases</name>
+        	<id>snooze-release-repository</id>
+		<name>Snooze Release Repository</name>
         	<url>dav:https://webdav.irisa.fr/snooze.inria.fr/htdocs/maven/releases</url>
     	</repository>
     	<snapshotRepository>
-        	<id>snapshot-repository</id>
-                <name>INRIA Snooze Snapshots</name>
+        	<id>snooze-snapshot-repository</id>
+                <name>Snooze Snapshot Repository</name>
         	<url>dav:https://webdav.irisa.fr/snooze.inria.fr/htdocs/maven/snapshots</url>
     	</snapshotRepository>
   </distributionManagement>
 
   <scm>
-    <connection>scm:git:http://github.com/snoozesoftware/snoozecommon.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/snoozesoftware/snoozecommon.git</developerConnection>
-    <url>https://github.com/snoozesoftware/snoozecommon.git</url>
+	<connection>scm:git:http://github.com/snoozesoftware/snoozecommon.git</connection>
+    	<developerConnection>scm:git:ssh://git@github.com/snoozesoftware/snoozecommon.git</developerConnection>
+    	<url>https://github.com/snoozesoftware/snoozecommon.git</url>
   </scm>
 
   <build>
@@ -100,6 +100,10 @@
         		<groupId>org.apache.maven.plugins</groupId>
         		<artifactId>maven-release-plugin</artifactId>
         		<version>2.2.2</version>
+        		<configuration>
+          			<autoVersionSubmodules>true</autoVersionSubmodules>
+          			<useReleaseProfile>true</useReleaseProfile>
+       			 </configuration>
 	      	</plugin>
 	</plugins>    
   </build>
