@@ -21,39 +21,14 @@ package org.inria.myriads.snoozecommon.communication.virtualcluster.submission;
 
 import java.io.Serializable;
 
-import org.inria.myriads.snoozecommon.communication.virtualcluster.status.VirtualClusterErrorCode;
-
 /**
- * Virtual cluster response.
+ * Virtual machine submission response.
  * 
  * @author Eugen Feller
  */
-public final class VirtualClusterSubmissionResponse extends VirtualMachineSubmissionResponse
+public class VirtualMachineSubmissionResponse extends VirtualMachineSubmissionRequest
     implements Serializable
 {
     /** Default serial. */
-    private static final long serialVersionUID = 1L;
-    
-    /** Error code. */
-    private VirtualClusterErrorCode errorCode_;
-    
-    /**
-     * Sets the error code.
-     * 
-     * @param errorCode     The error code
-     */
-    public void setErrorCode(VirtualClusterErrorCode errorCode) 
-    {
-        errorCode_ = errorCode;
-    }
-    
-    /**
-     * Returns the error code.
-     * 
-     * @return  The error code
-     */
-    public VirtualClusterErrorCode getErrorCode()
-    {
-        return errorCode_;
-    }
+    private static final long serialVersionUID = 1L;    
 }

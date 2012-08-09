@@ -34,7 +34,8 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.requests.Meta
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionResponse;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineLocation;
-import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmission;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
@@ -329,7 +330,7 @@ public final class RESTletGroupManagerCommunicator
      * @param submissionRequest      The virtual machine submission request
      * @return                       The task identifier
      */
-    public String startVirtualMachines(VirtualMachineSubmission submissionRequest) 
+    public String startVirtualMachines(VirtualMachineSubmissionRequest submissionRequest) 
     {
         Guard.check(submissionRequest);  
         log_.debug("Starting virtual machines"); 
@@ -777,23 +778,23 @@ public final class RESTletGroupManagerCommunicator
     /**
      * Returns the virtual machine response.
      * 
-     * @param virtualMachineId    The virtual machine identifier
-     * @return                    The virtual machine response
+     * @param taskIdentifier    The task identifier
+     * @return                  The virtual machine submission response
      */
     @Override
-    public VirtualMachineSubmission getVirtualMachineResponse(String virtualMachineId) 
+    public VirtualMachineSubmissionResponse getVirtualMachineSubmissionResponse(String taskIdentifier) 
     {
-        Guard.check(virtualMachineId);
+        Guard.check(taskIdentifier);
         log_.debug(String.format("Sending virtual machine %s response lookup reuest to group manager", 
-                virtualMachineId));     
+                taskIdentifier));     
         
         ClientResource clientResource = null;
-        VirtualMachineSubmission response = null;
+        VirtualMachineSubmissionResponse response = null;
         try
         {
             clientResource = createClientResource();
             GroupManagerAPI groupManagerResource = clientResource.wrap(GroupManagerAPI.class);
-            response = groupManagerResource.getVirtualMachineResponse(virtualMachineId);
+            response = groupManagerResource.getVirtualMachineSubmissionResponse(taskIdentifier);
         }
         catch (Exception exception)
         {

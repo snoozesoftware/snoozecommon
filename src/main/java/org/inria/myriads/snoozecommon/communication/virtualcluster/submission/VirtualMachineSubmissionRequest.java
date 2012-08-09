@@ -20,40 +20,43 @@
 package org.inria.myriads.snoozecommon.communication.virtualcluster.submission;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-import org.inria.myriads.snoozecommon.communication.virtualcluster.status.VirtualClusterErrorCode;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 
 /**
- * Virtual cluster response.
+ * Virtual machine submission request.
  * 
  * @author Eugen Feller
  */
-public final class VirtualClusterSubmissionResponse extends VirtualMachineSubmissionResponse
+public class VirtualMachineSubmissionRequest 
     implements Serializable
 {
     /** Default serial. */
     private static final long serialVersionUID = 1L;
     
-    /** Error code. */
-    private VirtualClusterErrorCode errorCode_;
+    /** Virtual machine meta data. */
+    private ArrayList<VirtualMachineMetaData> virtualMachineMetaData_;
     
     /**
-     * Sets the error code.
+     * Sets the virtual machine meta data.
      * 
-     * @param errorCode     The error code
+     * @param virtualMachineMetaData  The meta data data
      */
-    public void setErrorCode(VirtualClusterErrorCode errorCode) 
+    public final void setVirtualMachineMetaData(ArrayList<VirtualMachineMetaData> virtualMachineMetaData) 
     {
-        errorCode_ = errorCode;
+        virtualMachineMetaData_ = virtualMachineMetaData;
     }
     
     /**
-     * Returns the error code.
+     * Returns the virtual machine meta data.
      * 
-     * @return  The error code
+     * @return  The meta data
      */
-    public VirtualClusterErrorCode getErrorCode()
+    public final ArrayList<VirtualMachineMetaData> getVirtualMachineMetaData() 
     {
-        return errorCode_;
+        return virtualMachineMetaData_;
     }
+    
+    
 }

@@ -59,6 +59,9 @@ public final class LocalControllerDescription
     /** Virtual machine meta data. */
     private HashMap<String, VirtualMachineMetaData> virtualMachineMetaData_;
     
+    /** Assigned virtual machines. */
+    private ArrayList<VirtualMachineMetaData> assignedVirtualMachines_;
+    
     /** Total capacity of the local controller. */
     private ArrayList<Double> totalCapacity_;
     
@@ -71,6 +74,7 @@ public final class LocalControllerDescription
         hypervisorSettings_ = new HypervisorSettings();
         wakeupSettings_ = new WakeupSettings();
         virtualMachineMetaData_ = new HashMap<String, VirtualMachineMetaData>();
+        assignedVirtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         totalCapacity_ = new ArrayList<Double>();
     }
     
@@ -89,6 +93,7 @@ public final class LocalControllerDescription
         hypervisorSettings_ = new HypervisorSettings(original.getHypervisorSettings());
         wakeupSettings_ = new WakeupSettings(original.getWakeupSettings());
         virtualMachineMetaData_ = original.getVirtualMachineMetaData(numberOfMonitoringEntries);
+        assignedVirtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         totalCapacity_ = new ArrayList<Double>(original.getTotalCapacity());
     }
     
@@ -252,5 +257,25 @@ public final class LocalControllerDescription
     public WakeupSettings getWakeupSettings() 
     {
         return wakeupSettings_;
+    }
+
+    /**
+     * Returns the assigned virtual machines.
+     * 
+     * @return  The assigned virtual machines
+     */
+    public ArrayList<VirtualMachineMetaData> getAssignedVirtualMachines()
+    {
+        return assignedVirtualMachines_;
+    }
+
+    /**
+     * Sets the assigned virtual machines.
+     * 
+     * @param assignedVirtualMachines   The assigned virtual machines
+     */
+    public void setAssignedVirtualMachines(ArrayList<VirtualMachineMetaData> assignedVirtualMachines)
+    {
+        assignedVirtualMachines_ = assignedVirtualMachines;
     }
 }

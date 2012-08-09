@@ -25,6 +25,8 @@ import org.inria.myriads.snoozecommon.communication.rest.api.LocalControllerAPI;
 import org.inria.myriads.snoozecommon.communication.rest.util.RESTUtil;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
@@ -76,19 +78,19 @@ public final class RESTLocalControllerCommunicator
      * @return                           true if everything ok, else otherwise
      */
     @Override
-    public boolean startVirtualMachine(VirtualMachineMetaData virtualMachineMetaData)
+    public VirtualMachineSubmissionResponse startVirtualMachines(VirtualMachineSubmissionRequest submissionRequest)
     {
-        Guard.check(virtualMachineMetaData);
-        log_.debug(String.format("Starting virtual machine %s on local controller", 
-                                 virtualMachineMetaData.getVirtualMachineLocation().getVirtualMachineId()));
+        Guard.check(submissionRequest);
+        log_.debug(String.format("Starting %s virtual machine on local controller", 
+                   submissionRequest.getVirtualMachineMetaData().size()));
         
         ClientResource clientResource = null;
-        boolean isStarted = false;
+        VirtualMachineSubmissionResponse submissionResponse = null;
         try
         {
             clientResource = createClientResource();
             LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
-            isStarted = localControllerResource.startVirtualMachine(virtualMachineMetaData);
+            submissionResponse = localControllerResource.startVirtualMachines(submissionRequest);
         } 
         catch (Exception exception)
         {
@@ -101,7 +103,8 @@ public final class RESTLocalControllerCommunicator
                 clientResource.release();
             }
         }
-        return isStarted;
+        
+        return submissionResponse;
     }
 
     /**

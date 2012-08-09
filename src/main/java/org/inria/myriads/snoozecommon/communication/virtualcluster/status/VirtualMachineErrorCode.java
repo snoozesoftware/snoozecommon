@@ -45,5 +45,11 @@ public enum VirtualMachineErrorCode
     /** Not enough group manager capacity. */
     NOT_ENOUGH_GROUP_MANAGER_CAPACITY, 
     /** Local controller wakeup failure. */
-    LOCAL_CONTROLLER_WAKEUP_FAILED
+    LOCAL_CONTROLLER_WAKEUP_FAILED, 
+    /** Failed to start monitoring. */
+    FAILED_TO_START_MONITORING, 
+    /** Failed to start virtual machine. */
+    FAILED_TO_START_ON_HYPERVISOR, 
+    /** Signals invalid submission response. */
+    INVALID_SUBMISSION_RESPONSE
 }

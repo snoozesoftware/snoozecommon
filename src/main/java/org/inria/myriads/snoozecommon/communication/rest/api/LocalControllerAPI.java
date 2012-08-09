@@ -21,6 +21,8 @@ package org.inria.myriads.snoozecommon.communication.rest.api;
 
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 
@@ -35,17 +37,17 @@ public interface LocalControllerAPI
      * Start a virtual machine.
      * (called by the group manager)
      *  
-     * @param virtualMachineMetaData        The virtual machine description
-     * @return                              true if everything ok, false otherwise
+     * @param submissionRequest     The submission request
+     * @return                      The submission response
      */
-    @Post("?startVirtualMachine")
-    boolean startVirtualMachine(VirtualMachineMetaData virtualMachineMetaData);
+    @Post("?startVirtualMachines")
+    VirtualMachineSubmissionResponse startVirtualMachines(VirtualMachineSubmissionRequest submissionRequest);
     
     /**
      * Routine to suspend a virtual machine.
      * 
      * @param id   The virtual machine identifier
-     * @return      true if everything ok, false otherwise
+     * @return     true if everything ok, false otherwise
      */
     @Post("?suspendVirtualMachine")
     boolean suspendVirtualMachine(String id);
@@ -54,7 +56,7 @@ public interface LocalControllerAPI
      * Routine to resume a virtual machine.
      * 
      * @param id   The virtual machine identifier
-     * @return  true if everything ok, false otherwise
+     * @return     true if everything ok, false otherwise
      */
     @Post("?resumeVirtualMachine")
     boolean resumeVirtualMachine(String id);
@@ -63,7 +65,7 @@ public interface LocalControllerAPI
      * Routine to shutdown a virtual machine.
      * 
      * @param id   The virtual machine identifier
-     * @return      true if everything ok, false otherwise
+     * @return     true if everything ok, false otherwise
      */
     @Post("?shutdownVirtualMachine")
     boolean shutdownVirtualMachine(String id);
