@@ -528,7 +528,42 @@ public final class RESTletGroupManagerCommunicator
     }
     
     /**
-     * Routine to shutdown a virtual machine.
+     * Routine to reboot a virtual machine.
+     * 
+     * @param location   The virtual machine location
+     * @return           true if everything ok, false otherwise
+     */
+    @Override
+    public boolean rebootVirtualMachine(VirtualMachineLocation location)
+    {
+        Guard.check(location);
+        log_.debug(String.format("Sending virtual machine %s reboot command to group manager", 
+                                 location.getVirtualMachineId(), location.getLocalControllerId()));
+        
+        ClientResource clientResource = null;
+        boolean isRebooted = false;
+        try
+        {
+            clientResource = createClientResource();
+            GroupManagerAPI groupManagerResource = clientResource.wrap(GroupManagerAPI.class);
+            isRebooted = groupManagerResource.rebootVirtualMachine(location);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting group manager", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return isRebooted;       
+    }
+    
+    /**
+     * Routine to shutdown (hard shutdown) a virtual machine.
      * 
      * @param location   The virtual machine location
      * @return           true if everything ok, false otherwise

@@ -165,6 +165,15 @@ public interface GroupManagerAPI
     boolean shutdownVirtualMachine(VirtualMachineLocation location);
     
     /**
+     * Routine to reboot a virtual machine.
+     * 
+     * @param location    The virtual machine location
+     * @return            true if everything ok, false otherwise
+     */
+    @Post("?rebootVirtualMachine")
+    boolean rebootVirtualMachine(VirtualMachineLocation location);
+    
+    /**
      * Routine to shutdown a virtual machine.
      * 
      * @param location    The management request
