@@ -70,6 +70,17 @@ public interface LocalControllerAPI
     @Post("?shutdownVirtualMachine")
     boolean shutdownVirtualMachine(String virtualMachineId);
     
+    
+    /**
+     * Routine to reboot a virtual machine.
+     * 
+     * @param id   The virtual machine identifier
+     * @return     true if everything ok, false otherwise
+     */
+    @Post("?rebootVirtualMachine")
+    boolean rebootVirtualMachine(String id);
+    
+    
     /**
      * Routine to destroy a virtual machine.
      * 

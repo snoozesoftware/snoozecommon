@@ -278,6 +278,40 @@ public final class RESTLocalControllerCommunicator
     }
 
     /**
+     * Reboot a virtual machine.
+     * 
+     * @param virtualMachineId  The virtual machine identifier 
+     * @return                  true if everything ok, else otherwise
+     */
+    @Override
+    public boolean rebootVirtualMachine(String virtualMachineId)
+    {
+        Guard.check(virtualMachineId);
+        log_.debug(String.format("Reboot virtual machine %s on local controller", virtualMachineId));
+           
+        ClientResource clientResource = null;
+        boolean isRebooted = false;
+        try
+        {
+            clientResource = createClientResource();
+            LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
+            isRebooted = localControllerResource.rebootVirtualMachine(virtualMachineId);    
+        } 
+        catch (Exception exception)
+        {
+            log_.debug("Error during virtual machine reboot", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return isRebooted;   
+    }
+    
+    /**
      * Send suspend to disk request.
      * 
      * @return    true if everything ok, else otherwise
