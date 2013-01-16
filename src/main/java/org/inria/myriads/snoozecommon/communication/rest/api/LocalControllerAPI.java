@@ -44,40 +44,40 @@ public interface LocalControllerAPI
     VirtualMachineSubmissionResponse startVirtualMachines(VirtualMachineSubmissionRequest submissionRequest);
     
     /**
-     * Routine to suspend a virtual machine.
+     * Routine to suspend a virtual machine on request.
      * 
-     * @param id   The virtual machine identifier
-     * @return     true if everything ok, false otherwise
+     * @param virtualMachineId   The virtual machine identifier
+     * @return                   true if everything ok, false otherwise
      */
-    @Post("?suspendVirtualMachine")
-    boolean suspendVirtualMachine(String id);
+    @Post("?suspendVirtualMachineOnRequest")
+    boolean suspendVirtualMachineOnRequest(String virtualMachineId);
     
     /**
      * Routine to resume a virtual machine.
      * 
-     * @param id   The virtual machine identifier
-     * @return     true if everything ok, false otherwise
+     * @param virtualMachineId   The virtual machine identifier
+     * @return                   true if everything ok, false otherwise
      */
     @Post("?resumeVirtualMachine")
-    boolean resumeVirtualMachine(String id);
+    boolean resumeVirtualMachine(String virtualMachineId);
         
     /**
      * Routine to shutdown a virtual machine.
      * 
-     * @param id   The virtual machine identifier
-     * @return     true if everything ok, false otherwise
+     * @param virtualMachineId   The virtual machine identifier
+     * @return                   true if everything ok, false otherwise
      */
     @Post("?shutdownVirtualMachine")
-    boolean shutdownVirtualMachine(String id);
+    boolean shutdownVirtualMachine(String virtualMachineId);
     
     /**
      * Routine to destroy a virtual machine.
      * 
-     * @param id   The virtual machine identifier
-     * @return     true if everything ok, false otherwise
+     * @param virtualMachineId   The virtual machine identifier
+     * @return                   true if everything ok, false otherwise
      */
     @Post("?destroyVirtualMachine")
-    boolean destroyVirtualMachine(String id);
+    boolean destroyVirtualMachine(String virtualMachineId);
     
     /**
      * Routine to migrate a virtual machine.
@@ -128,4 +128,13 @@ public interface LocalControllerAPI
      */
     @Post("?startVirtualMachineMonitoring")
     boolean startVirtualMachineMonitoring(VirtualMachineMetaData virtualMachineMetaData);
+
+    /**
+     * Suspends a virtual machine on migration.
+     * 
+     * @param virtualMachineId      The virtual machine identifier
+     * @return                      true if everything ok, false otherwise
+     */
+    @Post("?suspendVirtualMachineOnMigration")
+    boolean suspendVirtualMachineOnMigration(String virtualMachineId);
 }

@@ -32,8 +32,10 @@ public enum MigrationMethod
     /*** Noshared full. */
     nosharedfull(64),
     /** No shared incremental. */
-    nosharedincremental(128);
-
+    nosharedincremental(128),
+    /** Force unsage migration. */
+    forceunsafe(512);
+    
     /** The index. */
     private int index_;
 

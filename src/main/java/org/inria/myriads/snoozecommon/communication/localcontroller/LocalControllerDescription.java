@@ -252,7 +252,7 @@ public final class LocalControllerDescription
     /**
      * Returns the wakeup settings.
      * 
-     * @return The wakeup settings
+     * @return  The wakeup settings
      */
     public WakeupSettings getWakeupSettings() 
     {

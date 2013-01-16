@@ -72,10 +72,10 @@ public final class RESTLocalControllerCommunicator
     }
     
     /**
-     * Start a virtual machine.
+     * Starts a virtual machine.
      * 
-     * @param virtualMachineMetaData  The virtual machine description 
-     * @return                           true if everything ok, else otherwise
+     * @param submissionRequest  The virtual machine submission request 
+     * @return                   true if everything ok, else otherwise
      */
     @Override
     public VirtualMachineSubmissionResponse startVirtualMachines(VirtualMachineSubmissionRequest submissionRequest)
@@ -176,16 +176,16 @@ public final class RESTLocalControllerCommunicator
     }
     
     /**
-     * Suspend a virtual machine.
+     * Suspend a virtual machine on request.
      * 
      * @param virtualMachineId  The virtual machine identifier 
      * @return                  true if everything ok, else otherwise
      */
     @Override
-    public boolean suspendVirtualMachine(String virtualMachineId)
+    public boolean suspendVirtualMachineOnRequest(String virtualMachineId)
     {
         Guard.check(virtualMachineId);
-        log_.debug(String.format("Suspend virtual machine %s on local controller", virtualMachineId));
+        log_.debug(String.format("Suspending virtual machine %s on request", virtualMachineId));
         
         ClientResource clientResource = null;
         boolean isSuspended = false;
@@ -193,7 +193,7 @@ public final class RESTLocalControllerCommunicator
         {
             clientResource = createClientResource();
             LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
-            isSuspended = localControllerResource.suspendVirtualMachine(virtualMachineId);   
+            isSuspended = localControllerResource.suspendVirtualMachineOnRequest(virtualMachineId);   
         } 
         catch (Exception exception)
         {
@@ -209,6 +209,40 @@ public final class RESTLocalControllerCommunicator
         return isSuspended;   
     }
 
+    /**
+     * Suspend a virtual machine.
+     * 
+     * @param virtualMachineId  The virtual machine identifier 
+     * @return                  true if everything ok, else otherwise
+     */
+    @Override
+    public boolean suspendVirtualMachineOnMigration(String virtualMachineId)
+    {
+        Guard.check(virtualMachineId);
+        log_.debug(String.format("Suspending virtual machine %s on migration", virtualMachineId));
+        
+        ClientResource clientResource = null;
+        boolean isSuspended = false;
+        try
+        {
+            clientResource = createClientResource();
+            LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
+            isSuspended = localControllerResource.suspendVirtualMachineOnMigration(virtualMachineId);   
+        } 
+        catch (Exception exception)
+        {
+            log_.debug("Error during virtual machine suspend on migration", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return isSuspended;   
+    }
+    
     /**
      * Shutdown a virtual machine.
      * 
