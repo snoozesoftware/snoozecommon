@@ -40,6 +40,13 @@ public final class Globals
     
     /** Network tx utilization index. */
     public static final int NETWORK_TX_UTILIZATION_INDEX = 3;
+
+    /** Default CPU demand (for resize).*/
+    public static final double DEFAULT_CPU = 1;
+    
+    /** Default Memory demand (for resize)*/
+    public static final double DEFAULT_MEMORY = 512000;
+    
     
     /** Hide constructor. */
     private Globals()

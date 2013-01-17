@@ -36,8 +36,11 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineLocation;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
+import org.inria.myriads.snoozecommon.communication.virtualmachine.ClientMigrationRequest;
+import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -845,4 +848,32 @@ public final class RESTletGroupManagerCommunicator
         
         return response;   
     }
+
+    
+    /**
+     * Resize a virtual machine.
+     * (call by the client)
+     * not implemented here...
+     * @param ResizeReques     The resize Request
+     * @return                 true if ok false otherwise
+     */
+    public boolean resizeVirtualMachine(ResizeRequest resizeRequest) {
+        return false;
+    }
+
+    
+
+    /**
+     * Migrate a virtual machine.
+     * (call by the client)
+     * not implemented here...
+     * @param clientMigrationRequest     The client migration Request
+     * @return                           true if ok false otherwise
+     */
+    public boolean migrateVirtualMachine(ClientMigrationRequest clientMigrationRequest) {
+        return false;
+    }
+
+
+
 }

@@ -20,6 +20,7 @@
 package org.inria.myriads.snoozecommon.communication.rest.api;
 
 import org.inria.myriads.snoozecommon.communication.groupmanager.GroupManagerDescription;
+import org.inria.myriads.snoozecommon.communication.groupmanager.repository.GroupLeaderRepositoryInformation;
 import org.restlet.resource.Get;
 
 /**
@@ -30,11 +31,23 @@ import org.restlet.resource.Get;
 public interface BootstrapAPI
 {
     /** 
-     * Assign local controller to a group manager.
+     * gets the group leadre description to a group manager.
      * (called by the local controller)
      *  
      * @return   The group leader description
      */
     @Get("?getGroupLeaderDescription")
     GroupManagerDescription getGroupLeaderDescription();
+    
+    /**
+     * 
+     * gets the complee hierarchy from group leader to virtual machines
+     * by decorating the GroupLeaderRepositoryInformation structure.
+     * 
+     * @return  The hierarchy in the GroupLeaderRepositoryInformation class 
+     * 
+     * */
+    @Get("?getCompleteHierarchy")
+    GroupLeaderRepositoryInformation getCompleteHierarchy();
+    
 }

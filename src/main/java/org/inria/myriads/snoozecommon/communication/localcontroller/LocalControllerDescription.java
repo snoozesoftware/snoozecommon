@@ -20,6 +20,7 @@
 package org.inria.myriads.snoozecommon.communication.localcontroller;
 
 import java.io.Serializable;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +29,7 @@ import org.inria.myriads.snoozecommon.communication.NetworkAddress;
 import org.inria.myriads.snoozecommon.communication.localcontroller.hypervisor.HypervisorSettings;
 import org.inria.myriads.snoozecommon.communication.localcontroller.wakeup.WakeupSettings;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
+import org.inria.myriads.snoozecommon.globals.Globals;
 import org.inria.myriads.snoozecommon.guard.Guard;
 
 /**
@@ -50,6 +52,9 @@ public final class LocalControllerDescription
     /** Control data address. */
     private NetworkAddress controlDataAddress_;
     
+    /** Hostname. */
+    private String hostname_;
+    
     /** Hypervisor settings. */
     private HypervisorSettings hypervisorSettings_;
     
@@ -70,14 +75,27 @@ public final class LocalControllerDescription
      */
     public LocalControllerDescription()
     {
+        super();
         controlDataAddress_ = new NetworkAddress();
         hypervisorSettings_ = new HypervisorSettings();
         wakeupSettings_ = new WakeupSettings();
         virtualMachineMetaData_ = new HashMap<String, VirtualMachineMetaData>();
         assignedVirtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         totalCapacity_ = new ArrayList<Double>();
+        hostname_ = initializeHostname();
     }
     
+    private String initializeHostname() {
+        String hostname = null;
+        try {
+          final InetAddress addr = InetAddress.getLocalHost();
+          hostname = new String(addr.getHostName());
+        } catch(final Exception e) {
+            hostname = Globals.DEFAULT_INITIALIZATION;
+        }
+        return hostname;
+    }
+
     /**
      * Copy constructor.
      * 
@@ -95,6 +113,7 @@ public final class LocalControllerDescription
         virtualMachineMetaData_ = original.getVirtualMachineMetaData(numberOfMonitoringEntries);
         assignedVirtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         totalCapacity_ = new ArrayList<Double>(original.getTotalCapacity());
+        hostname_ = original.getHostname();
     }
     
     /**
@@ -277,5 +296,22 @@ public final class LocalControllerDescription
     public void setAssignedVirtualMachines(ArrayList<VirtualMachineMetaData> assignedVirtualMachines)
     {
         assignedVirtualMachines_ = assignedVirtualMachines;
+    }
+
+
+    /**
+     * @return the hostname
+     */
+    public String getHostname() 
+    {
+        return hostname_;
+    }
+
+    /**
+     * @param hostname the hostname to set
+     */
+    public void setHostname(String hostname) 
+    {
+        hostname_ = hostname;
     }
 }

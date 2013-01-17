@@ -22,6 +22,7 @@ package org.inria.myriads.snoozecommon.communication.rest.api.impl;
 import org.inria.myriads.snoozecommon.communication.NetworkAddress;
 import org.inria.myriads.snoozecommon.communication.NodeRole;
 import org.inria.myriads.snoozecommon.communication.groupmanager.GroupManagerDescription;
+import org.inria.myriads.snoozecommon.communication.groupmanager.repository.GroupLeaderRepositoryInformation;
 import org.inria.myriads.snoozecommon.communication.rest.api.BootstrapAPI;
 import org.inria.myriads.snoozecommon.communication.rest.util.RESTUtil;
 import org.inria.myriads.snoozecommon.guard.Guard;
@@ -96,5 +97,37 @@ public final class RESTletBootstrapCommunicator
             }
         }
         return groupManagerDescription;    
+    }
+    
+    /**
+     * Request the current group leader.
+     * 
+     * @return      Current group leader description
+     */
+    @Override
+    public GroupLeaderRepositoryInformation getCompleteHierarchy()
+    {
+        log_.debug("Requesting group leader from bootstrap node");
+        
+        ClientResource clientResource = null;
+        GroupLeaderRepositoryInformation hierarchy = null;
+        try
+        {
+            clientResource = createClientResource();
+            BootstrapAPI bootstrapResource = clientResource.wrap(BootstrapAPI.class); 
+            hierarchy = bootstrapResource.getCompleteHierarchy();
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting bootstrap", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return hierarchy;    
     }
 }

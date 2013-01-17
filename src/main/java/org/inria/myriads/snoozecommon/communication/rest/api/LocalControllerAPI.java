@@ -23,6 +23,7 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachin
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
+import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 
@@ -139,4 +140,14 @@ public interface LocalControllerAPI
      */
     @Post("?startVirtualMachineMonitoring")
     boolean startVirtualMachineMonitoring(VirtualMachineMetaData virtualMachineMetaData);
+
+    /**
+     * 
+     * Resizes a vm
+     * 
+     * @param virtualMachineId
+     * @return
+     */
+    @Post("?resizeVirtualMachine")
+    VirtualMachineMetaData resizeVirtualMachine(ResizeRequest resizeRequest);
 }

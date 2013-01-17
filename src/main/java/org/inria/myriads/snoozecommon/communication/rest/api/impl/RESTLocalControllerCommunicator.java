@@ -27,8 +27,10 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachin
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
+import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -484,5 +486,34 @@ public final class RESTLocalControllerCommunicator
         }
         
         return isStarted;
+    }
+
+    @Override
+    @Post("?resizeVirtualMachine")
+    public VirtualMachineMetaData resizeVirtualMachine(ResizeRequest resizeRequest) 
+    {
+        Guard.check(resizeRequest);
+        log_.debug(String.format("Resizing %s virtual machine on local controller", resizeRequest.getVirtualMachineLocation().getVirtualMachineId()));
+        
+        ClientResource clientResource = null;
+        VirtualMachineMetaData virtualMachine = null;
+        try
+        {
+            clientResource = createClientResource();
+            LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
+            virtualMachine = localControllerResource.resizeVirtualMachine(resizeRequest);
+        } 
+        catch (Exception exception)
+        {
+            log_.debug("Error during virtual machine start", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return virtualMachine;
     }
 }
