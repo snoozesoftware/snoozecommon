@@ -31,7 +31,8 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.requests.Meta
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionResponse;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineLocation;
-import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmission;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 
@@ -55,11 +56,11 @@ public interface GroupManagerAPI
     /**
      * Returns the virtual machine response.
      * 
-     * @param virtualMachineId    The virtual machine identifier
-     * @return                    The virtual machine response
+     * @param taskIdentifier    The task identifier
+     * @return                  The virtual machine submission response
      */
-    @Post("?getVirtualMachineResponse")
-    VirtualMachineSubmission getVirtualMachineResponse(String virtualMachineId);
+    @Post("?getVirtualMachineSubmissionResponse")
+    VirtualMachineSubmissionResponse getVirtualMachineSubmissionResponse(String taskIdentifier);
     
     /**
      * Returns the virtual cluster response.
@@ -134,7 +135,7 @@ public interface GroupManagerAPI
      * @return                       The task identifier
      */
     @Post("?startVirtualMachines")
-    String startVirtualMachines(VirtualMachineSubmission submissionRequest); 
+    String startVirtualMachines(VirtualMachineSubmissionRequest submissionRequest); 
                 
     /**
      * Routine to suspend a virtual machine.
@@ -162,6 +163,15 @@ public interface GroupManagerAPI
      */
     @Post("?shutdownVirtualMachine")
     boolean shutdownVirtualMachine(VirtualMachineLocation location);
+    
+    /**
+     * Routine to reboot a virtual machine.
+     * 
+     * @param location    The virtual machine location
+     * @return            true if everything ok, false otherwise
+     */
+    @Post("?rebootVirtualMachine")
+    boolean rebootVirtualMachine(VirtualMachineLocation location);
     
     /**
      * Routine to shutdown a virtual machine.

@@ -25,6 +25,8 @@ import org.inria.myriads.snoozecommon.communication.rest.api.LocalControllerAPI;
 import org.inria.myriads.snoozecommon.communication.rest.util.RESTUtil;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
@@ -70,25 +72,25 @@ public final class RESTLocalControllerCommunicator
     }
     
     /**
-     * Start a virtual machine.
+     * Starts a virtual machine.
      * 
-     * @param virtualMachineMetaData  The virtual machine description 
-     * @return                           true if everything ok, else otherwise
+     * @param submissionRequest  The virtual machine submission request 
+     * @return                   true if everything ok, else otherwise
      */
     @Override
-    public boolean startVirtualMachine(VirtualMachineMetaData virtualMachineMetaData)
+    public VirtualMachineSubmissionResponse startVirtualMachines(VirtualMachineSubmissionRequest submissionRequest)
     {
-        Guard.check(virtualMachineMetaData);
-        log_.debug(String.format("Starting virtual machine %s on local controller", 
-                                 virtualMachineMetaData.getVirtualMachineLocation().getVirtualMachineId()));
+        Guard.check(submissionRequest);
+        log_.debug(String.format("Starting %s virtual machine on local controller", 
+                   submissionRequest.getVirtualMachineMetaData().size()));
         
         ClientResource clientResource = null;
-        boolean isStarted = false;
+        VirtualMachineSubmissionResponse submissionResponse = null;
         try
         {
             clientResource = createClientResource();
             LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
-            isStarted = localControllerResource.startVirtualMachine(virtualMachineMetaData);
+            submissionResponse = localControllerResource.startVirtualMachines(submissionRequest);
         } 
         catch (Exception exception)
         {
@@ -101,7 +103,8 @@ public final class RESTLocalControllerCommunicator
                 clientResource.release();
             }
         }
-        return isStarted;
+        
+        return submissionResponse;
     }
 
     /**
@@ -173,16 +176,16 @@ public final class RESTLocalControllerCommunicator
     }
     
     /**
-     * Suspend a virtual machine.
+     * Suspend a virtual machine on request.
      * 
      * @param virtualMachineId  The virtual machine identifier 
      * @return                  true if everything ok, else otherwise
      */
     @Override
-    public boolean suspendVirtualMachine(String virtualMachineId)
+    public boolean suspendVirtualMachineOnRequest(String virtualMachineId)
     {
         Guard.check(virtualMachineId);
-        log_.debug(String.format("Suspend virtual machine %s on local controller", virtualMachineId));
+        log_.debug(String.format("Suspending virtual machine %s on request", virtualMachineId));
         
         ClientResource clientResource = null;
         boolean isSuspended = false;
@@ -190,7 +193,7 @@ public final class RESTLocalControllerCommunicator
         {
             clientResource = createClientResource();
             LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
-            isSuspended = localControllerResource.suspendVirtualMachine(virtualMachineId);   
+            isSuspended = localControllerResource.suspendVirtualMachineOnRequest(virtualMachineId);   
         } 
         catch (Exception exception)
         {
@@ -206,6 +209,40 @@ public final class RESTLocalControllerCommunicator
         return isSuspended;   
     }
 
+    /**
+     * Suspend a virtual machine.
+     * 
+     * @param virtualMachineId  The virtual machine identifier 
+     * @return                  true if everything ok, else otherwise
+     */
+    @Override
+    public boolean suspendVirtualMachineOnMigration(String virtualMachineId)
+    {
+        Guard.check(virtualMachineId);
+        log_.debug(String.format("Suspending virtual machine %s on migration", virtualMachineId));
+        
+        ClientResource clientResource = null;
+        boolean isSuspended = false;
+        try
+        {
+            clientResource = createClientResource();
+            LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
+            isSuspended = localControllerResource.suspendVirtualMachineOnMigration(virtualMachineId);   
+        } 
+        catch (Exception exception)
+        {
+            log_.debug("Error during virtual machine suspend on migration", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return isSuspended;   
+    }
+    
     /**
      * Shutdown a virtual machine.
      * 
@@ -240,6 +277,40 @@ public final class RESTLocalControllerCommunicator
         return isShutdown;   
     }
 
+    /**
+     * Reboot a virtual machine.
+     * 
+     * @param virtualMachineId  The virtual machine identifier 
+     * @return                  true if everything ok, else otherwise
+     */
+    @Override
+    public boolean rebootVirtualMachine(String virtualMachineId)
+    {
+        Guard.check(virtualMachineId);
+        log_.debug(String.format("Reboot virtual machine %s on local controller", virtualMachineId));
+           
+        ClientResource clientResource = null;
+        boolean isRebooted = false;
+        try
+        {
+            clientResource = createClientResource();
+            LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
+            isRebooted = localControllerResource.rebootVirtualMachine(virtualMachineId);    
+        } 
+        catch (Exception exception)
+        {
+            log_.debug("Error during virtual machine reboot", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return isRebooted;   
+    }
+    
     /**
      * Send suspend to disk request.
      * 
