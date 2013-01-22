@@ -141,13 +141,5 @@ public interface LocalControllerAPI
     @Post("?startVirtualMachineMonitoring")
     boolean startVirtualMachineMonitoring(VirtualMachineMetaData virtualMachineMetaData);
 
-    /**
-     * 
-     * Resizes a vm
-     * 
-     * @param virtualMachineId
-     * @return
-     */
-    @Post("?resizeVirtualMachine")
-    VirtualMachineMetaData resizeVirtualMachine(ResizeRequest resizeRequest);
+
 }

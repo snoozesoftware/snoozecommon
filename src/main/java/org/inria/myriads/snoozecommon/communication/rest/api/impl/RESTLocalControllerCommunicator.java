@@ -488,32 +488,5 @@ public final class RESTLocalControllerCommunicator
         return isStarted;
     }
 
-    @Override
-    @Post("?resizeVirtualMachine")
-    public VirtualMachineMetaData resizeVirtualMachine(ResizeRequest resizeRequest) 
-    {
-        Guard.check(resizeRequest);
-        log_.debug(String.format("Resizing %s virtual machine on local controller", resizeRequest.getVirtualMachineLocation().getVirtualMachineId()));
-        
-        ClientResource clientResource = null;
-        VirtualMachineMetaData virtualMachine = null;
-        try
-        {
-            clientResource = createClientResource();
-            LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
-            virtualMachine = localControllerResource.resizeVirtualMachine(resizeRequest);
-        } 
-        catch (Exception exception)
-        {
-            log_.debug("Error during virtual machine start", exception);
-        }
-        finally
-        {
-            if (clientResource != null)
-            {
-                clientResource.release();
-            }
-        }
-        return virtualMachine;
-    }
+
 }

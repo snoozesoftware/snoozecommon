@@ -245,15 +245,6 @@ public interface GroupManagerAPI
     @Post("?hasLocalController")
     String hasLocalController(NetworkAddress localControllerAddress);
     
-    /**
-     * Resize a virtual machine.
-     * (call by the client)
-     * 
-     * @param ResizeReques     The resize Request
-     * @return                 true if ok false otherwise
-     */
-    @Post("?resizeVirtualMachine")
-    boolean resizeVirtualMachine(ResizeRequest resizeRequest);
     
     /**
      * Migrate a virtual machine.

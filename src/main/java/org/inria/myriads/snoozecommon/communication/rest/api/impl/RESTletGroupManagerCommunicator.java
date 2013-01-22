@@ -849,20 +849,6 @@ public final class RESTletGroupManagerCommunicator
         return response;   
     }
 
-    
-    /**
-     * Resize a virtual machine.
-     * (call by the client)
-     * not implemented here...
-     * @param ResizeReques     The resize Request
-     * @return                 true if ok false otherwise
-     */
-    public boolean resizeVirtualMachine(ResizeRequest resizeRequest) {
-        return false;
-    }
-
-    
-
     /**
      * Migrate a virtual machine.
      * (call by the client)
