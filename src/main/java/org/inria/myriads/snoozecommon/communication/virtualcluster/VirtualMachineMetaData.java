@@ -146,7 +146,9 @@ public final class VirtualMachineMetaData
      */
     public void setRequestedCapacity(ArrayList<Double> requestedCapacity) 
     {
-        requestedCapacity_ = requestedCapacity;       
+        requestedCapacity_ = requestedCapacity;
+        //change in the libvirt template too in case of hard resize...
+        
     }
 
     /**

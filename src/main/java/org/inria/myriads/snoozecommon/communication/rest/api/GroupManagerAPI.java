@@ -33,6 +33,7 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineLocation;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
+import org.inria.myriads.snoozecommon.communication.virtualmachine.ClientMigrationRequest;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 
@@ -242,5 +243,17 @@ public interface GroupManagerAPI
      */
     @Post("?hasLocalController")
     String hasLocalController(NetworkAddress localControllerAddress);
+    
+    
+    /**
+     * Migrate a virtual machine.
+     * (call by the client)
+     * 
+     * @param clientMigrationRequest     The client migration Request
+     * @return                           true if ok false otherwise
+     */
+    @Post("?migrateVirtualMachine")
+    boolean migrateVirtualMachine(ClientMigrationRequest clientMigrationRequest);
+    
 }
 

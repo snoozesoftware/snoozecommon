@@ -78,7 +78,8 @@ public final class RESTLocalControllerCommunicator
      * @return                   true if everything ok, else otherwise
      */
     @Override
-    public VirtualMachineSubmissionResponse startVirtualMachines(VirtualMachineSubmissionRequest submissionRequest)
+    public VirtualMachineSubmissionResponse startVirtualMachines(
+            VirtualMachineSubmissionRequest submissionRequest)
     {
         Guard.check(submissionRequest);
         log_.debug(String.format("Starting %s virtual machine on local controller", 
@@ -519,4 +520,6 @@ public final class RESTLocalControllerCommunicator
         
         return isStarted;
     }
+
+
 }

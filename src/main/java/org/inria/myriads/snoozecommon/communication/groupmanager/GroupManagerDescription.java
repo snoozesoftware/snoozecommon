@@ -20,6 +20,7 @@
 package org.inria.myriads.snoozecommon.communication.groupmanager;
 
 import java.io.Serializable;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,7 @@ import org.inria.myriads.snoozecommon.communication.groupmanager.summary.GroupMa
 import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerDescription;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.datastructure.LRUCache;
+import org.inria.myriads.snoozecommon.globals.Globals;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +59,9 @@ public final class GroupManagerDescription
     
     /** Listen settings. */
     private ListenSettings listenSettings_;
+    
+    /** Hostname.*/
+    private String hostname_;
        
     /** Assigned virtual machines. */
     private ArrayList<VirtualMachineMetaData> virtualMachines_;
@@ -75,15 +80,17 @@ public final class GroupManagerDescription
         virtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         summary_ = new LRUCache<Long, GroupManagerSummaryInformation>();
         localControllers_ = new HashMap<String, LocalControllerDescription>();
+        hostname_ = initializeHostname(); 
     }
        
+  
     /**
      * Copy constructor.
      * 
      * @param groupManager              The group manager description
      * @param numberOfBacklogEntries    The number of backlog entries
      */
-    public GroupManagerDescription(GroupManagerDescription groupManager, int numberOfBacklogEntries) 
+    public GroupManagerDescription(GroupManagerDescription groupManager, int numberOfBacklogEntries)
     {
         Guard.check(groupManager, numberOfBacklogEntries);
         id_ = groupManager.getId();
@@ -91,6 +98,29 @@ public final class GroupManagerDescription
         listenSettings_ = new ListenSettings(groupManager.getListenSettings());
         virtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         summary_ = groupManager.getGroupManagerSummaryData(numberOfBacklogEntries);
+        hostname_ = groupManager.getHostname();
+    }
+
+    
+    /**
+     * 
+     * Initializes the hostname.
+     * 
+     * @return      The hostname                
+     */
+    private String initializeHostname()
+    {
+        String hostname = null;
+        try 
+        {
+          final InetAddress addr = InetAddress.getLocalHost();
+          hostname = new String(addr.getHostName());
+        } 
+        catch (final Exception e) 
+        {
+            hostname = Globals.DEFAULT_INITIALIZATION;
+        }
+        return hostname;
     }
 
     /**
@@ -244,5 +274,21 @@ public final class GroupManagerDescription
     public ArrayList<VirtualMachineMetaData> getVirtualMachines() 
     {
         return virtualMachines_;
+    }
+
+    /**
+     * @return the hostname
+     */
+    public String getHostname() 
+    {
+        return hostname_;
+    }
+
+    /**
+     * @param hostname the hostname to set
+     */
+    public void setHostname(String hostname) 
+    {
+        hostname_ = hostname;
     }
 }

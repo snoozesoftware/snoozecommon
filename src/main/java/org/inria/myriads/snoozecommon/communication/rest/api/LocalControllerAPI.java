@@ -148,4 +148,5 @@ public interface LocalControllerAPI
      */
     @Post("?suspendVirtualMachineOnMigration")
     boolean suspendVirtualMachineOnMigration(String virtualMachineId);
+
 }

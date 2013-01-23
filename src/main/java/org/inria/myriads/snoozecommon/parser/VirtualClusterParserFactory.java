@@ -17,40 +17,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses>.
  */
-package org.inria.myriads.snoozecommon.globals;
+package org.inria.myriads.snoozecommon.parser;
+
+import org.inria.myriads.snoozecommon.parser.api.VirtualClusterParser;
+import org.inria.myriads.snoozecommon.parser.api.impl.LibVirtXMLParser;
+
+
 
 /**
- * Global variables.
+ * Virtual cluster parser factory.
  * 
  * @author Eugen Feller
  */
-public final class Globals 
+public final class VirtualClusterParserFactory 
 {
-    /** Default value. */
-    public static final String DEFAULT_INITIALIZATION = "UNKNOWN";
-        
-    /** Cpu utilization index. */
-    public static final int CPU_UTILIZATION_INDEX = 0;
-    
-    /** Memory utilization index. */
-    public static final int MEMORY_UTILIZATION_INDEX = 1;
-    
-    /** Network rx utilization index. */
-    public static final int NETWORK_RX_UTILIZATION_INDEX = 2;
-    
-    /** Network tx utilization index. */
-    public static final int NETWORK_TX_UTILIZATION_INDEX = 3;
-
-    /** Default CPU demand (for resize).*/
-    public static final double DEFAULT_CPU = 1;
-    
-    /** Default Memory demand (for resize).*/
-    public static final double DEFAULT_MEMORY = 512000;
-    
-    
     /** Hide constructor. */
-    private Globals()
+    private VirtualClusterParserFactory()
     {
         throw new UnsupportedOperationException();
+    }
+    
+    /**
+     * Creates a new virtual cluster parser.
+     * 
+     * @return              The virtual cluster parser
+     * @throws Exception
+     */
+    public static VirtualClusterParser newVirtualClusterParser() 
+    {
+        return new LibVirtXMLParser();
     }
 }
