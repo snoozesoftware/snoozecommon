@@ -37,10 +37,8 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ClientMigrationRequest;
-import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
-import org.restlet.resource.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -856,7 +854,8 @@ public final class RESTletGroupManagerCommunicator
      * @param clientMigrationRequest     The client migration Request
      * @return                           true if ok false otherwise
      */
-    public boolean migrateVirtualMachine(ClientMigrationRequest clientMigrationRequest) {
+    public boolean migrateVirtualMachine(ClientMigrationRequest clientMigrationRequest) 
+    {
         return false;
     }
 

@@ -27,10 +27,8 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachin
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
-import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
-import org.restlet.resource.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,11 +74,12 @@ public final class RESTLocalControllerCommunicator
     /**
      * Start a virtual machine.
      * 
-     * @param virtualMachineMetaData  The virtual machine description 
+     * @param submissionRequest          The submission request
      * @return                           true if everything ok, else otherwise
      */
     @Override
-    public VirtualMachineSubmissionResponse startVirtualMachines(VirtualMachineSubmissionRequest submissionRequest)
+    public VirtualMachineSubmissionResponse startVirtualMachines(
+            VirtualMachineSubmissionRequest submissionRequest)
     {
         Guard.check(submissionRequest);
         log_.debug(String.format("Starting %s virtual machine on local controller", 

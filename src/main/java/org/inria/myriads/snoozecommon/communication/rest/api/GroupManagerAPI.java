@@ -34,7 +34,6 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ClientMigrationRequest;
-import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 

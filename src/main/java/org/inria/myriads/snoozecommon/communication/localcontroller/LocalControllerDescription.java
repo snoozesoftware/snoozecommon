@@ -85,16 +85,7 @@ public final class LocalControllerDescription
         hostname_ = initializeHostname();
     }
     
-    private String initializeHostname() {
-        String hostname = null;
-        try {
-          final InetAddress addr = InetAddress.getLocalHost();
-          hostname = new String(addr.getHostName());
-        } catch(final Exception e) {
-            hostname = Globals.DEFAULT_INITIALIZATION;
-        }
-        return hostname;
-    }
+   
 
     /**
      * Copy constructor.
@@ -116,6 +107,26 @@ public final class LocalControllerDescription
         hostname_ = original.getHostname();
     }
     
+    /**
+     * 
+     * Initializes the hostname.
+     * 
+     * @return          The hostname
+     */
+    private String initializeHostname()
+    {
+        String hostname = null;
+        try
+        {
+          final InetAddress addr = InetAddress.getLocalHost();
+          hostname = new String(addr.getHostName());
+        }
+        catch (final Exception e)
+        {
+            hostname = Globals.DEFAULT_INITIALIZATION;
+        }
+        return hostname;
+    }
     /**
      * Returns the algorithm virtual machine meta data.
      * 

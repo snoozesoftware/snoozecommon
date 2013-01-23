@@ -61,7 +61,7 @@ public final class GroupManagerDescription
     private ListenSettings listenSettings_;
     
     /** Hostname.*/
-    private String hostname_ ;
+    private String hostname_;
        
     /** Assigned virtual machines. */
     private ArrayList<VirtualMachineMetaData> virtualMachines_;
@@ -83,24 +83,14 @@ public final class GroupManagerDescription
         hostname_ = initializeHostname(); 
     }
        
-    private String initializeHostname() {
-        String hostname = null;
-        try {
-          final InetAddress addr = InetAddress.getLocalHost();
-          hostname = new String(addr.getHostName());
-        } catch(final Exception e) {
-            hostname = Globals.DEFAULT_INITIALIZATION;
-        }
-        return hostname;
-    }
-
+  
     /**
      * Copy constructor.
      * 
      * @param groupManager              The group manager description
      * @param numberOfBacklogEntries    The number of backlog entries
      */
-    public GroupManagerDescription(GroupManagerDescription groupManager, int numberOfBacklogEntries) 
+    public GroupManagerDescription(GroupManagerDescription groupManager, int numberOfBacklogEntries)
     {
         Guard.check(groupManager, numberOfBacklogEntries);
         id_ = groupManager.getId();
@@ -109,6 +99,28 @@ public final class GroupManagerDescription
         virtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         summary_ = groupManager.getGroupManagerSummaryData(numberOfBacklogEntries);
         hostname_ = groupManager.getHostname();
+    }
+
+    
+    /**
+     * 
+     * Initializes the hostname.
+     * 
+     * @return      The hostname                
+     */
+    private String initializeHostname()
+    {
+        String hostname = null;
+        try 
+        {
+          final InetAddress addr = InetAddress.getLocalHost();
+          hostname = new String(addr.getHostName());
+        } 
+        catch (final Exception e) 
+        {
+            hostname = Globals.DEFAULT_INITIALIZATION;
+        }
+        return hostname;
     }
 
     /**
@@ -267,14 +279,16 @@ public final class GroupManagerDescription
     /**
      * @return the hostname
      */
-    public String getHostname() {
+    public String getHostname() 
+    {
         return hostname_;
     }
 
     /**
      * @param hostname the hostname to set
      */
-    public void setHostname(String hostname) {
+    public void setHostname(String hostname) 
+    {
         hostname_ = hostname;
     }
 }

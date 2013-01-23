@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineLocation;
-import org.inria.myriads.snoozecommon.globals.Globals;
 
 /**
  * 
- * Resize Request
+ * Resize Request.
  * 
  * @author msimonin
  *
@@ -18,10 +17,11 @@ public class ResizeRequest implements Serializable
      /** Serial Id. */
     private static final long serialVersionUID = 1L;
     
-    /** Virtual Machine Id*/
-    VirtualMachineLocation virtualMachineLocation_;
+    /** Virtual Machine Id.*/
+    private VirtualMachineLocation virtualMachineLocation_;
     
-    ArrayList<Double> resizedCapacity_;
+    /** the resized capacity.*/
+    private ArrayList<Double> resizedCapacity_;
 
     /**
      * Constructor.
@@ -33,8 +33,11 @@ public class ResizeRequest implements Serializable
 
     /**
      * Constructor.
+     * 
+     * @param resizeRequest         The resize request.
+     * 
      */
-    public ResizeRequest(ResizeRequest resizeRequest) 
+    public ResizeRequest(ResizeRequest resizeRequest)
     {
         virtualMachineLocation_ = resizeRequest.getVirtualMachineLocation();
         resizedCapacity_ = resizeRequest.getResizedCapacity();
@@ -59,7 +62,8 @@ public class ResizeRequest implements Serializable
     /**
      * @return the virtualMachineLocation
      */
-    public VirtualMachineLocation getVirtualMachineLocation() {
+    public VirtualMachineLocation getVirtualMachineLocation() 
+    {
         return virtualMachineLocation_;
     }
 

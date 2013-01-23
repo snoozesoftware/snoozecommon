@@ -12,10 +12,11 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 public class ClientMigrationRequest 
 {
 
-
-    VirtualMachineLocation oldLocation_;
+    /** The old loclation.*/
+    private VirtualMachineLocation oldLocation_;
     
-    VirtualMachineLocation newLocation_;
+    /** The new loclation.*/
+    private VirtualMachineLocation newLocation_;
 
     /**
      * 
@@ -34,8 +35,8 @@ public class ClientMigrationRequest
      * 
      * Constructor.
      * 
-     * @param oldLocation
-     * @param newLocation
+     * @param oldLocation           The old location 
+     * @param newLocation           The new location
      */
     public ClientMigrationRequest(VirtualMachineLocation oldLocation,
             VirtualMachineLocation newLocation) 

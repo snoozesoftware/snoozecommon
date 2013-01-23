@@ -317,7 +317,8 @@ public final class LibVirtXMLParser
         Guard.check(xmlDescription, resizeRequest);
         
         String newTemplate = xmlDescription;
-        try{
+        try
+        {
             int vcpu = new Double(resizeRequest.getResizedCapacity().get(0)).intValue();
             int memory = new Double(resizeRequest.getResizedCapacity().get(1)).intValue();
             int tx = new Double(resizeRequest.getResizedCapacity().get(2)).intValue();
@@ -332,14 +333,14 @@ public final class LibVirtXMLParser
             
             
             NodeList nodes = doc.getElementsByTagName("vcpu");
-            if (nodes.getLength() > 0 && nodes.item(0).getNodeType() == Node.ELEMENT_NODE && vcpu>0)
+            if (nodes.getLength() > 0 && nodes.item(0).getNodeType() == Node.ELEMENT_NODE && vcpu > 0)
             {
                 Node node = nodes.item(0);
                 node = node.getFirstChild();
                 node.setNodeValue(String.valueOf(vcpu));
             }
             nodes = doc.getElementsByTagName("memory");
-            if (nodes.getLength() > 0 && nodes.item(0).getNodeType() == Node.ELEMENT_NODE  && memory>0)
+            if (nodes.getLength() > 0 && nodes.item(0).getNodeType() == Node.ELEMENT_NODE  && memory > 0)
             {
                 Node node = nodes.item(0);
                 node = node.getFirstChild();
@@ -349,7 +350,7 @@ public final class LibVirtXMLParser
             newTemplate = VirtualClusterParserUtils.domToString(doc);
             return newTemplate;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             log_.error("error while modifyong the template");
             return newTemplate;
