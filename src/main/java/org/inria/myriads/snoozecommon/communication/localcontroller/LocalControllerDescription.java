@@ -93,7 +93,7 @@ public final class LocalControllerDescription
      * @param original                      The original description
      * @param numberOfMonitoringEntries     The number of monitoring entries
      */
-    public LocalControllerDescription(LocalControllerDescription original, int numberOfMonitoringEntries)
+    public LocalControllerDescription(LocalControllerDescription original, int numberOfMonitoringEntries, boolean withVirtualMachines)
     {
         Guard.check(original, numberOfMonitoringEntries);
         id_ = original.getId();
@@ -101,7 +101,14 @@ public final class LocalControllerDescription
         controlDataAddress_ = new NetworkAddress(original.getControlDataAddress());
         hypervisorSettings_ = new HypervisorSettings(original.getHypervisorSettings());
         wakeupSettings_ = new WakeupSettings(original.getWakeupSettings());
-        virtualMachineMetaData_ = original.getVirtualMachineMetaData(numberOfMonitoringEntries);
+        if (withVirtualMachines)
+        {
+            virtualMachineMetaData_ = original.getVirtualMachineMetaData(numberOfMonitoringEntries);
+        }
+        else
+        {
+            virtualMachineMetaData_ = new HashMap<String, VirtualMachineMetaData>();
+        }   
         assignedVirtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         totalCapacity_ = new ArrayList<Double>(original.getTotalCapacity());
         hostname_ = original.getHostname();

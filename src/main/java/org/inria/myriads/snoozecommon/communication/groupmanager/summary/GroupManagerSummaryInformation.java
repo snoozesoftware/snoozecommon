@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerDescription;
 import org.inria.myriads.snoozecommon.guard.Guard;
 
 /**
@@ -69,8 +70,15 @@ public final class GroupManagerSummaryInformation
                
     /**
      * List of legacy IP addresses.
+     * (freed IP address)
      */
     private ArrayList<String> legacyIpAddresses_;
+    
+    /**
+     * List of assigned local controller.
+     * 
+     */
+    private ArrayList<LocalControllerDescription> localControllers_;
     
     /** Empty constructor. */
     public GroupManagerSummaryInformation() 
@@ -92,6 +100,7 @@ public final class GroupManagerSummaryInformation
         activeCapacity_ = new ArrayList<Double>(summary.getActiveCapacity());
         passiveCapacity_ = new ArrayList<Double>(summary.getPassiveCapacity());
         legacyIpAddresses_ = new ArrayList<String>(summary.getLegacyIpAddresses());
+        localControllers_ = new ArrayList<LocalControllerDescription>(summary.getLocalControllers());
     }
 
     /**
@@ -212,5 +221,22 @@ public final class GroupManagerSummaryInformation
     public Long getTimeStamp() 
     {
         return new Long(timeStamp_);
+    }
+
+    /**
+     * @return the localControllers
+     */
+    public ArrayList<LocalControllerDescription> getLocalControllers() 
+    {
+        return localControllers_;
+    }
+
+    /**
+     * @param localControllers the localControllers to set
+     */
+    public void setLocalControllers(
+            ArrayList<LocalControllerDescription> localControllers) 
+    {
+        localControllers_ = localControllers;
     }
 }

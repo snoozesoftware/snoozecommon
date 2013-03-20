@@ -25,6 +25,7 @@ import org.inria.myriads.snoozecommon.communication.groupmanager.repository.Grou
 import org.inria.myriads.snoozecommon.communication.groupmanager.repository.GroupManagerRepositoryInformation;
 import org.inria.myriads.snoozecommon.communication.localcontroller.AssignedGroupManager;
 import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerDescription;
+import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerList;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.discovery.VirtualMachineDiscoveryResponse;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.requests.MetaDataRequest;
@@ -255,5 +256,16 @@ public interface GroupManagerAPI
     @Post("?migrateVirtualMachine")
     boolean migrateVirtualMachine(ClientMigrationRequest clientMigrationRequest);
     
+
+    /**
+     * 
+     * Gets the list of local controllers.
+     * 
+     * @return      The local controller list
+     */
+    @Get("?getLocalControllerList")
+    LocalControllerList getLocalControllerList();
+    
+
 }
 
