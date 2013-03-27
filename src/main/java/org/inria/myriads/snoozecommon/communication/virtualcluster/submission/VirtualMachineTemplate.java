@@ -40,6 +40,9 @@ public final class VirtualMachineTemplate
     /** Libvirt description. */
     private String libVirtDescription_;
     
+    /** Node{group manager id or local controller id} Id (force placement). */
+    private String hostId_;
+    
     /** Constructor. */
     public VirtualMachineTemplate()
     {
@@ -84,5 +87,21 @@ public final class VirtualMachineTemplate
     public String getLibVirtTemplate() 
     {
         return libVirtDescription_;
+    }
+
+    /**
+     * @return the hostId
+     */
+    public String getHostId() 
+    {
+        return hostId_;
+    }
+
+    /**
+     * @param hostId the hostId to set
+     */
+    public void setHostId(String hostId) 
+    {
+        hostId_ = hostId;
     }
 }

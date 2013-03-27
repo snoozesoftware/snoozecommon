@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Eugen Feller
  */
-public final class GroupManagerDescription 
+public class GroupManagerDescription 
     implements Serializable
 {            
     /** Logger. */
@@ -98,6 +98,7 @@ public final class GroupManagerDescription
         listenSettings_ = new ListenSettings(groupManager.getListenSettings());
         virtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         summary_ = groupManager.getGroupManagerSummaryData(numberOfBacklogEntries);
+        localControllers_ = new HashMap<String, LocalControllerDescription>(groupManager.getLocalControllers());
         hostname_ = groupManager.getHostname();
     }
 

@@ -30,6 +30,7 @@ import org.inria.myriads.snoozecommon.communication.groupmanager.GroupManagerDes
 import org.inria.myriads.snoozecommon.communication.virtualcluster.monitoring.VirtualMachineMonitoringData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.status.VirtualMachineErrorCode;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.status.VirtualMachineStatus;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineGroupManagerLocation;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineLocation;
 import org.inria.myriads.snoozecommon.datastructure.LRUCache;
 import org.inria.myriads.snoozecommon.globals.Globals;
@@ -42,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Eugen Feller
  */
-public final class VirtualMachineMetaData
+public class VirtualMachineMetaData
     implements Serializable
 {
     /** Logger. */
@@ -63,11 +64,12 @@ public final class VirtualMachineMetaData
     /** Error code. */
     private VirtualMachineErrorCode errorCode_;
     
-    /** Location. */
+    //need to merge this to object.
+    /** Local Controller Location. */
     private VirtualMachineLocation location_;
-            
-    /** Group manager address. */
-    private NetworkAddress groupManagerControlDataAddress_;
+                
+    /** Group Manager Location. */
+    private VirtualMachineGroupManagerLocation groupManagerLocation_;
     
     /** Virtual monitoring history data. */
     private LRUCache<Long, VirtualMachineMonitoringData> usedCapacity_;
@@ -84,7 +86,7 @@ public final class VirtualMachineMetaData
         status_ = VirtualMachineStatus.UNKNOWN; 
         errorCode_ = VirtualMachineErrorCode.UNKNOWN;
         location_ = new VirtualMachineLocation();
-        groupManagerControlDataAddress_ = new NetworkAddress();
+        groupManagerLocation_ = new VirtualMachineGroupManagerLocation();
         usedCapacity_ = new LRUCache<Long, VirtualMachineMonitoringData>();
     }
     
@@ -99,9 +101,9 @@ public final class VirtualMachineMetaData
         Guard.check(metaData, numberOfMonitoringEntries);
         ipAddress_ = metaData.getIpAddress();
         location_ = new VirtualMachineLocation(metaData.getVirtualMachineLocation());
+        groupManagerLocation_ = new VirtualMachineGroupManagerLocation(metaData.getGroupManagerLocation());
         status_ = metaData.getStatus();
         errorCode_ = metaData.getErrorCode();
-        groupManagerControlDataAddress_ = new NetworkAddress(metaData.getGroupManagerControlDataAddress());
         usedCapacity_ = metaData.getMonitoringData(numberOfMonitoringEntries);
         requestedCapacity_ = new ArrayList<Double>(metaData.getRequestedCapacity());
         xmlRepresentation_ = metaData.getXmlRepresentation();
@@ -268,7 +270,8 @@ public final class VirtualMachineMetaData
      */
     public void setGroupManagerControlDataAddress(NetworkAddress groupManagerControlDataAddress) 
     {
-        groupManagerControlDataAddress_ = groupManagerControlDataAddress;
+        //groupManagerControlDataAddress_ = groupManagerControlDataAddress;
+        groupManagerLocation_.setGroupManagerControlDataAddress(groupManagerControlDataAddress);
     }
 
     /**
@@ -278,7 +281,8 @@ public final class VirtualMachineMetaData
      */
     public NetworkAddress getGroupManagerControlDataAddress() 
     {
-        return groupManagerControlDataAddress_;
+        //return groupManagerControlDataAddress_;
+        return groupManagerLocation_.getGroupManagerControlDataAddress();
     }
     
     /**
@@ -299,5 +303,22 @@ public final class VirtualMachineMetaData
     public String getIpAddress()
     {
         return ipAddress_;
+    }
+
+    /**
+     * @return the groupManagerLocation
+     */
+    public VirtualMachineGroupManagerLocation getGroupManagerLocation() 
+    {
+        return groupManagerLocation_;
+    }
+
+    /**
+     * @param groupManagerLocation the groupManagerLocation to set
+     */
+    public void setGroupManagerLocation(
+            VirtualMachineGroupManagerLocation groupManagerLocation) 
+    {
+        groupManagerLocation_ = groupManagerLocation;
     }
 }

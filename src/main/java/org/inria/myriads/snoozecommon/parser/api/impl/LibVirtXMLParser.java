@@ -29,6 +29,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.monitoring.NetworkDemand;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineGroupManagerLocation;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineTemplate;
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.exception.VirtualClusterParserException;
@@ -68,6 +69,7 @@ public final class LibVirtXMLParser
     }
     
     /**
+     * @deprecated
      * Creates virtual machine meta data.
      * 
      * @param cluster                        The virual cluster description
@@ -106,9 +108,8 @@ public final class LibVirtXMLParser
      * @param virtualMachineDescription     The virtual machine description
      * @return                              The virtual machine meta data
      * @throws Exception 
-     * @throws Exception
      */
-    private VirtualMachineMetaData parseDescription(VirtualMachineTemplate virtualMachineDescription) 
+    public VirtualMachineMetaData parseDescription(VirtualMachineTemplate virtualMachineDescription) 
         throws Exception 
     {
         Guard.check(virtualMachineDescription);
@@ -120,7 +121,7 @@ public final class LibVirtXMLParser
             documentBuilder.parse(new InputSource(new StringReader(virtualMachineDescription.getLibVirtTemplate())));
 
         VirtualMachineMetaData virtualMachineMetaData = 
-            parseDocument(document, virtualMachineDescription.getNetworkCapacityDemand());    
+            parseDocument(document, virtualMachineDescription.getNetworkCapacityDemand());  
         virtualMachineMetaData.setXmlRepresentation(virtualMachineDescription.getLibVirtTemplate());
         return virtualMachineMetaData;
     }

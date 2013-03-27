@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineTemplate;
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.exception.VirtualClusterParserException;
 
@@ -80,6 +81,16 @@ public interface VirtualClusterParser
      * @return                  the new xml description of the domain
      */
     String handleResizeRequest(String xmlDesc, ResizeRequest resizeRequest);
+    
+    /**
+     * Start processing the file.
+     * 
+     * @param virtualMachineDescription     The virtual machine description
+     * @return                              The virtual machine meta data
+     * @throws Exception 
+     * @throws Exception
+     */
+    public VirtualMachineMetaData parseDescription(VirtualMachineTemplate virtualMachineDescription) throws Exception;
     
 }
 
