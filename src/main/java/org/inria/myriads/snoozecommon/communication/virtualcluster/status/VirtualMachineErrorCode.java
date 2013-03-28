@@ -51,5 +51,7 @@ public enum VirtualMachineErrorCode
     /** Failed to start virtual machine. */
     FAILED_TO_START_ON_HYPERVISOR, 
     /** Signals invalid submission response. */
-    INVALID_SUBMISSION_RESPONSE
+    INVALID_SUBMISSION_RESPONSE,
+    /** Signals that a wrong hostId has been submitted*/
+    INVALID_HOST_ID
 }
