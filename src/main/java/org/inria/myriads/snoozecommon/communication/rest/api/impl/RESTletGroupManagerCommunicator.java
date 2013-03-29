@@ -40,7 +40,6 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ClientMigrationRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
-import org.restlet.resource.Get;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -869,7 +868,29 @@ public final class RESTletGroupManagerCommunicator
      */
     public LocalControllerList getLocalControllerList()
     {
-        return null;
+        log_.debug("Sending local controller list request");     
+        
+        ClientResource clientResource = null;
+        LocalControllerList response = null;
+        try
+        {
+            clientResource = createClientResource();
+            GroupManagerAPI groupManagerResource = clientResource.wrap(GroupManagerAPI.class);
+            response = groupManagerResource.getLocalControllerList();
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting group manager", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        
+        return response; 
     }
 
 }

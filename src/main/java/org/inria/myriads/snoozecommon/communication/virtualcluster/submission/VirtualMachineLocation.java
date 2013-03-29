@@ -44,12 +44,20 @@ public final class VirtualMachineLocation
     /** Local controller address. */
     private NetworkAddress localControllerControlDataAddress_;
     
+    /** Virtual Machine group manager identifier. */
+    private String groupManagerId_;
+    
+    /** Group manager address. */
+    private NetworkAddress groupManagerControlDataAddress_;
+    
     /** Constructor. */
     public VirtualMachineLocation() 
     { 
         virtualMachineId_ = Globals.DEFAULT_INITIALIZATION;
         localControllerId_ = Globals.DEFAULT_INITIALIZATION;
         localControllerControlDataAddress_ = new NetworkAddress();
+        groupManagerId_ = Globals.DEFAULT_INITIALIZATION;
+        groupManagerControlDataAddress_ = new NetworkAddress();
     }
     
     /** 
@@ -62,6 +70,8 @@ public final class VirtualMachineLocation
         virtualMachineId_ = virtualMachineLocation.getVirtualMachineId();
         localControllerId_ = virtualMachineLocation.getLocalControllerId();
         localControllerControlDataAddress_ = virtualMachineLocation.getLocalControllerControlDataAddress();
+        groupManagerId_ = virtualMachineLocation.getGroupManagerId();
+        groupManagerControlDataAddress_ = virtualMachineLocation.getGroupManagerControlDataAddress();
     }
     
     /**
@@ -122,5 +132,47 @@ public final class VirtualMachineLocation
     public NetworkAddress getLocalControllerControlDataAddress() 
     {
         return localControllerControlDataAddress_;
+    }
+
+    /**
+     * Returns the group manager id.
+     * 
+     * @return the groupManagerId
+     */
+    public String getGroupManagerId() 
+    {
+        return groupManagerId_;
+    }
+
+    /**
+     * Sets the group manager id.
+     * 
+     * @param groupManagerId the groupManagerId to set
+     */
+    public void setGroupManagerId(String groupManagerId) 
+    {
+        groupManagerId_ = groupManagerId;
+    }
+
+    /**
+     * Return the group manager control data address.
+     * 
+     * @return the groupManagerControlDataAddress
+     */
+    public NetworkAddress getGroupManagerControlDataAddress() 
+    {
+        return groupManagerControlDataAddress_;
+    }
+
+    /**
+     * 
+     * Sets the group manager control data address.
+     * 
+     * @param groupManagerControlDataAddress the groupManagerControlDataAddress to set
+     */
+    public void setGroupManagerControlDataAddress(
+            NetworkAddress groupManagerControlDataAddress) 
+    {
+        groupManagerControlDataAddress_ = groupManagerControlDataAddress;
     }
 }

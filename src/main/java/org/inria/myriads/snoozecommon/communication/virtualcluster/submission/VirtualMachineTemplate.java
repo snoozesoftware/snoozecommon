@@ -22,6 +22,7 @@ package org.inria.myriads.snoozecommon.communication.virtualcluster.submission;
 import java.io.Serializable;
 
 import org.inria.myriads.snoozecommon.communication.virtualcluster.monitoring.NetworkDemand;
+import org.inria.myriads.snoozecommon.globals.Globals;
 
 /**
  * Virtual machine description.
@@ -47,6 +48,7 @@ public final class VirtualMachineTemplate
     public VirtualMachineTemplate()
     {
         networkCapacityDemand_ = new NetworkDemand();
+        hostId_ = Globals.DEFAULT_INITIALIZATION;
     }
     
     /**

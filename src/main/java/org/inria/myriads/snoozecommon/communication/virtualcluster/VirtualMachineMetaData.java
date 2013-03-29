@@ -30,7 +30,6 @@ import org.inria.myriads.snoozecommon.communication.groupmanager.GroupManagerDes
 import org.inria.myriads.snoozecommon.communication.virtualcluster.monitoring.VirtualMachineMonitoringData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.status.VirtualMachineErrorCode;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.status.VirtualMachineStatus;
-import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineGroupManagerLocation;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineLocation;
 import org.inria.myriads.snoozecommon.datastructure.LRUCache;
 import org.inria.myriads.snoozecommon.globals.Globals;
@@ -69,7 +68,6 @@ public class VirtualMachineMetaData
     private VirtualMachineLocation location_;
                 
     /** Group Manager Location. */
-    private VirtualMachineGroupManagerLocation groupManagerLocation_;
     
     /** Virtual monitoring history data. */
     private LRUCache<Long, VirtualMachineMonitoringData> usedCapacity_;
@@ -86,7 +84,6 @@ public class VirtualMachineMetaData
         status_ = VirtualMachineStatus.UNKNOWN; 
         errorCode_ = VirtualMachineErrorCode.UNKNOWN;
         location_ = new VirtualMachineLocation();
-        groupManagerLocation_ = new VirtualMachineGroupManagerLocation();
         usedCapacity_ = new LRUCache<Long, VirtualMachineMonitoringData>();
     }
     
@@ -101,7 +98,6 @@ public class VirtualMachineMetaData
         Guard.check(metaData, numberOfMonitoringEntries);
         ipAddress_ = metaData.getIpAddress();
         location_ = new VirtualMachineLocation(metaData.getVirtualMachineLocation());
-        groupManagerLocation_ = new VirtualMachineGroupManagerLocation(metaData.getGroupManagerLocation());
         status_ = metaData.getStatus();
         errorCode_ = metaData.getErrorCode();
         usedCapacity_ = metaData.getMonitoringData(numberOfMonitoringEntries);
@@ -270,8 +266,7 @@ public class VirtualMachineMetaData
      */
     public void setGroupManagerControlDataAddress(NetworkAddress groupManagerControlDataAddress) 
     {
-        //groupManagerControlDataAddress_ = groupManagerControlDataAddress;
-        groupManagerLocation_.setGroupManagerControlDataAddress(groupManagerControlDataAddress);
+        location_.setGroupManagerControlDataAddress(groupManagerControlDataAddress);
     }
 
     /**
@@ -281,8 +276,7 @@ public class VirtualMachineMetaData
      */
     public NetworkAddress getGroupManagerControlDataAddress() 
     {
-        //return groupManagerControlDataAddress_;
-        return groupManagerLocation_.getGroupManagerControlDataAddress();
+        return location_.getGroupManagerControlDataAddress();
     }
     
     /**
@@ -305,20 +299,4 @@ public class VirtualMachineMetaData
         return ipAddress_;
     }
 
-    /**
-     * @return the groupManagerLocation
-     */
-    public VirtualMachineGroupManagerLocation getGroupManagerLocation() 
-    {
-        return groupManagerLocation_;
-    }
-
-    /**
-     * @param groupManagerLocation the groupManagerLocation to set
-     */
-    public void setGroupManagerLocation(
-            VirtualMachineGroupManagerLocation groupManagerLocation) 
-    {
-        groupManagerLocation_ = groupManagerLocation;
-    }
 }

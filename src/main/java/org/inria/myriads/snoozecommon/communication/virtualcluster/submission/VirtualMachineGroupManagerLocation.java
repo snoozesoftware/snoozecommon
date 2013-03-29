@@ -107,7 +107,7 @@ public final class VirtualMachineGroupManagerLocation
     /**
      * Sets the local controller control data address.
      * 
-     * @param localControllerControlDataAddress     The local controller control data address
+     * @param groupManagerControlDataAddress     The group manager control data address
      */
     public void setGroupManagerControlDataAddress(NetworkAddress groupManagerControlDataAddress)
     {

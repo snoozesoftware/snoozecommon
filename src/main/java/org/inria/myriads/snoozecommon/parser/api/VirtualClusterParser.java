@@ -88,9 +88,8 @@ public interface VirtualClusterParser
      * @param virtualMachineDescription     The virtual machine description
      * @return                              The virtual machine meta data
      * @throws Exception 
-     * @throws Exception
      */
-    public VirtualMachineMetaData parseDescription(VirtualMachineTemplate virtualMachineDescription) throws Exception;
+    VirtualMachineMetaData parseDescription(VirtualMachineTemplate virtualMachineDescription) throws Exception;
     
 }
 

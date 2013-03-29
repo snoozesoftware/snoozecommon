@@ -6,7 +6,14 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LocalControllerList implements Serializable 
+/**
+ * 
+ * LocalControllerList.
+ * 
+ * @author msimonin
+ *
+ */
+public class LocalControllerList implements Serializable
 {
     /** Define the logger. */
     private static final Logger log_ = LoggerFactory.getLogger(LocalControllerList.class);
@@ -15,7 +22,7 @@ public class LocalControllerList implements Serializable
     private static final long serialVersionUID = 1L;
     
     /** Local Controller list. */
-    ArrayList<LocalControllerDescription> localControllers_;
+    private ArrayList<LocalControllerDescription> localControllers_;
 
     /**
      * Constructor.
@@ -27,16 +34,22 @@ public class LocalControllerList implements Serializable
 
     
     /**
-     * @param localControllers
+     * 
+     * Constructor.
+     * 
+     * @param localControllers      the localcontrollers.
      */
     public LocalControllerList(
-            ArrayList<LocalControllerDescription> localControllers) 
+            ArrayList<LocalControllerDescription> localControllers)
     {
         localControllers_ = localControllers;
     }
 
 
     /**
+     * 
+     * Gets the local controllers.
+     * 
      * @return the localControllers
      */
     public ArrayList<LocalControllerDescription> getLocalControllers() 
@@ -45,6 +58,9 @@ public class LocalControllerList implements Serializable
     }
 
     /**
+     * 
+     * Sets the local controllers.
+     * 
      * @param localControllers the localControllers to set
      */
     public void setLocalControllers(

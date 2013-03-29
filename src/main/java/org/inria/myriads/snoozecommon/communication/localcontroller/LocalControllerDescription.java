@@ -92,8 +92,11 @@ public final class LocalControllerDescription
      * 
      * @param original                      The original description
      * @param numberOfMonitoringEntries     The number of monitoring entries
+     * @param withVirtualMachines           True if virtual machines are needed
      */
-    public LocalControllerDescription(LocalControllerDescription original, int numberOfMonitoringEntries, boolean withVirtualMachines)
+    public LocalControllerDescription(LocalControllerDescription original, 
+            int numberOfMonitoringEntries, 
+            boolean withVirtualMachines)
     {
         Guard.check(original, numberOfMonitoringEntries);
         id_ = original.getId();
