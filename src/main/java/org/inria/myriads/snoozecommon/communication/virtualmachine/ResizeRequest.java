@@ -21,6 +21,8 @@ package org.inria.myriads.snoozecommon.communication.virtualmachine;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineLocation;
 
@@ -48,6 +50,7 @@ public class ResizeRequest implements Serializable
     public ResizeRequest() 
     {
         virtualMachineLocation_ = new VirtualMachineLocation();
+        resizedCapacity_ = new ArrayList<Double>(Arrays.asList(-1d, -1d, -1d, -1d));
     }
 
     /**

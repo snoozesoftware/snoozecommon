@@ -27,6 +27,7 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachin
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
+import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
@@ -485,6 +486,40 @@ public final class RESTLocalControllerCommunicator
         }
         return isMigrated;   
     }
+    
+    /**
+     * Resizes a virtual machine.
+     * 
+     * @param resizeRequest         The resize request
+     * @return                      true if everything ok, false otherwise
+     */
+    @Override
+    public VirtualMachineMetaData resizeVirtualMachine(ResizeRequest resizeRequest) 
+    {
+        Guard.check(resizeRequest);
+                
+        ClientResource clientResource = null;
+        VirtualMachineMetaData newVirtualMachineMetaData = null;
+        try
+        {
+            clientResource = createClientResource();
+            LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
+            newVirtualMachineMetaData = localControllerResource.resizeVirtualMachine(resizeRequest);
+        } 
+        catch (Exception exception)
+        {
+            log_.debug("Error during virtual machine migration", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return newVirtualMachineMetaData;   
+    }
+    
 
     /**
      * Starts virtual machine monitoring.

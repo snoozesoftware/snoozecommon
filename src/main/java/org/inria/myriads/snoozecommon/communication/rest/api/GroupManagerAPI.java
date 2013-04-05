@@ -35,6 +35,7 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ClientMigrationRequest;
+import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 
@@ -265,6 +266,16 @@ public interface GroupManagerAPI
      */
     @Get("?getLocalControllerList")
     LocalControllerList getLocalControllerList();
+    
+    /**
+     * 
+     * Resize a virtual machine.
+     * @param resizeRequest     The resize request.
+     * @return                  true if ok false otherwise
+     * 
+     */
+    @Post("?resizeVirtualMachine") 
+    VirtualMachineMetaData resizeVirtualMachine(ResizeRequest resizeRequest);
     
 
 }

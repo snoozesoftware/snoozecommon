@@ -38,6 +38,7 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ClientMigrationRequest;
+import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
 import org.slf4j.Logger;
@@ -891,6 +892,41 @@ public final class RESTletGroupManagerCommunicator
         }
         
         return response; 
+    }
+
+    /**
+     * Resize a virtual machine.
+     * (call by the client)
+     * not implemented here...
+     * 
+     * @param resizeRequest          The client resize Request
+     * @return                       true if ok false otherwise
+     */
+    public VirtualMachineMetaData resizeVirtualMachine(ResizeRequest resizeRequest)
+    {
+log_.debug("Sending local controller list request");     
+        
+        ClientResource clientResource = null;
+        
+        try
+        {
+            clientResource = createClientResource();
+            GroupManagerAPI groupManagerResource = clientResource.wrap(GroupManagerAPI.class);
+            return  groupManagerResource.resizeVirtualMachine(resizeRequest);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting group manager", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        
+        return null;
     }
 
 }
