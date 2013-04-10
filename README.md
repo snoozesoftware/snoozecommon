@@ -1,4 +1,4 @@
-# snoozecommon
+# snoozecommon (testing)
 
 Shared code between the Snooze client and node component.
 
