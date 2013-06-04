@@ -28,6 +28,7 @@ import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControl
 import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerList;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.discovery.VirtualMachineDiscoveryResponse;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.requests.MetaDataRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionResponse;
@@ -255,7 +256,9 @@ public interface GroupManagerAPI
      * @return                           true if ok false otherwise
      */
     @Post("?migrateVirtualMachine")
-    boolean migrateVirtualMachine(ClientMigrationRequest clientMigrationRequest);
+    boolean migrateVirtualMachine(MigrationRequest migrationRequest);
+    
+    
     
 
     /**
@@ -276,6 +279,17 @@ public interface GroupManagerAPI
      */
     @Post("?resizeVirtualMachine") 
     VirtualMachineMetaData resizeVirtualMachine(ResizeRequest resizeRequest);
+
+    /**
+     * 
+     * Request to add a new virtual machine after a successful migration.
+     * 
+     * @param virtualMachine    The virtual machine meta data.
+     * @return
+     */
+    @Post("addVirtualMachineAfterMigration")
+    boolean addVirtualMachineAfterMigration(
+            VirtualMachineMetaData virtualMachine);
     
 
 }

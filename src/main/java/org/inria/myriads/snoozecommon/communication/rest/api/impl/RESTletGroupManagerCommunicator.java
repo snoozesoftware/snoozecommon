@@ -31,6 +31,7 @@ import org.inria.myriads.snoozecommon.communication.rest.api.GroupManagerAPI;
 import org.inria.myriads.snoozecommon.communication.rest.util.RESTUtil;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.discovery.VirtualMachineDiscoveryResponse;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.requests.MetaDataRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionResponse;
@@ -41,6 +42,7 @@ import org.inria.myriads.snoozecommon.communication.virtualmachine.ClientMigrati
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -852,13 +854,32 @@ public final class RESTletGroupManagerCommunicator
     /**
      * Migrate a virtual machine.
      * (call by the client)
-     * not implemented here...
      * @param clientMigrationRequest     The client migration Request
      * @return                           true if ok false otherwise
      */
-    public boolean migrateVirtualMachine(ClientMigrationRequest clientMigrationRequest) 
+    public boolean migrateVirtualMachine(MigrationRequest migrationRequest) 
     {
-        return false;
+        log_.debug("Sending a migration request");
+        ClientResource clientResource = null;
+        boolean response = false; 
+        try
+        {
+            clientResource = createClientResource();
+            GroupManagerAPI groupManagerResource = clientResource.wrap(GroupManagerAPI.class);
+            response = groupManagerResource.migrateVirtualMachine(migrationRequest);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while migrating  the virtual machine", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return response;
     }
 
     /**
@@ -904,7 +925,7 @@ public final class RESTletGroupManagerCommunicator
      */
     public VirtualMachineMetaData resizeVirtualMachine(ResizeRequest resizeRequest)
     {
-log_.debug("Sending local controller list request");     
+        log_.debug("Sending local controller list request");     
         
         ClientResource clientResource = null;
         
@@ -927,6 +948,38 @@ log_.debug("Sending local controller list request");
         }
         
         return null;
+    }
+
+    /** 
+     * 
+     */
+    @Override
+    
+    public boolean addVirtualMachineAfterMigration(VirtualMachineMetaData virtualMachine) 
+    {
+        log_.debug("Sending add virtual machine request to groupmanager");     
+        
+        ClientResource clientResource = null;
+        
+        try
+        {
+            clientResource = createClientResource();
+            GroupManagerAPI groupManagerResource = clientResource.wrap(GroupManagerAPI.class);
+            return  groupManagerResource.addVirtualMachineAfterMigration(virtualMachine);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting group manager", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        
+        return false;
     }
 
 }
