@@ -63,7 +63,6 @@ public class VirtualMachineMetaData
     /** Error code. */
     private VirtualMachineErrorCode errorCode_;
     
-    //need to merge this to object.
     /** Local Controller Location. */
     private VirtualMachineLocation location_;
                 
