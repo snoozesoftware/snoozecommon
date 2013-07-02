@@ -29,8 +29,10 @@ import org.inria.myriads.snoozecommon.communication.NetworkAddress;
 import org.inria.myriads.snoozecommon.communication.localcontroller.hypervisor.HypervisorSettings;
 import org.inria.myriads.snoozecommon.communication.localcontroller.wakeup.WakeupSettings;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
+import org.inria.myriads.snoozecommon.datastructure.LRUCache;
 import org.inria.myriads.snoozecommon.globals.Globals;
 import org.inria.myriads.snoozecommon.guard.Guard;
+import org.inria.myriads.snoozecommon.metric.Metric;
 
 /**
  * Local controller description.
@@ -70,6 +72,9 @@ public final class LocalControllerDescription
     /** Total capacity of the local controller. */
     private ArrayList<Double> totalCapacity_;
     
+    /** Metrics. */
+    private Map<String, LRUCache<Long,Metric>> metricData_; 
+    
     /**
      * Constructor.
      */
@@ -83,6 +88,7 @@ public final class LocalControllerDescription
         assignedVirtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         totalCapacity_ = new ArrayList<Double>();
         hostname_ = initializeHostname();
+        metricData_ = new HashMap<String, LRUCache<Long,Metric>>();
     }
     
    
@@ -105,6 +111,8 @@ public final class LocalControllerDescription
         assignedVirtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         totalCapacity_ = new ArrayList<Double>(original.getTotalCapacity());
         hostname_ = original.getHostname();
+        metricData_ = original.getMetricData();
+        
     }
     
     /**
@@ -324,5 +332,23 @@ public final class LocalControllerDescription
     public void setHostname(String hostname) 
     {
         hostname_ = hostname;
+    }
+
+
+
+    /**
+     * @return the metricData
+     */
+    public Map<String, LRUCache<Long, Metric>> getMetricData() {
+        return metricData_;
+    }
+
+
+
+    /**
+     * @param metricData the metricData to set
+     */
+    public void setMetricData(Map<String, LRUCache<Long, Metric>> metricData) {
+        metricData_ = metricData;
     }
 }
