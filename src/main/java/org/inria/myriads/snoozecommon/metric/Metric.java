@@ -23,6 +23,12 @@ public class Metric implements Serializable
     /** Value. */
     private Double value_;
  
+    
+    
+    public Metric()
+    {
+        timestamp_ = new Timestamp(System.currentTimeMillis()).getTime(); 
+    }
     /**
      * 
      * Constructor.

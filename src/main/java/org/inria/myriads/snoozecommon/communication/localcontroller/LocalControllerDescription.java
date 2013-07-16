@@ -32,6 +32,7 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachin
 import org.inria.myriads.snoozecommon.datastructure.LRUCache;
 import org.inria.myriads.snoozecommon.globals.Globals;
 import org.inria.myriads.snoozecommon.guard.Guard;
+import org.inria.myriads.snoozecommon.metric.AggregatedMetricData;
 import org.inria.myriads.snoozecommon.metric.Metric;
 
 /**
@@ -73,7 +74,11 @@ public final class LocalControllerDescription
     private ArrayList<Double> totalCapacity_;
     
     /** Metrics. */
-    private Map<String, LRUCache<Long,Metric>> metricData_; 
+    //private AggregatedMetricData hostCapacity_;
+    private AggregatedMetricData customMetricCapacity_;
+ 
+    
+    
     
     /**
      * Constructor.
@@ -88,7 +93,7 @@ public final class LocalControllerDescription
         assignedVirtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         totalCapacity_ = new ArrayList<Double>();
         hostname_ = initializeHostname();
-        metricData_ = new HashMap<String, LRUCache<Long,Metric>>();
+        customMetricCapacity_ = new AggregatedMetricData();
     }
     
    
@@ -111,7 +116,7 @@ public final class LocalControllerDescription
         assignedVirtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         totalCapacity_ = new ArrayList<Double>(original.getTotalCapacity());
         hostname_ = original.getHostname();
-        metricData_ = original.getMetricData();
+        customMetricCapacity_ = original.getCustomMetricCapacity();
         
     }
     
@@ -339,8 +344,9 @@ public final class LocalControllerDescription
     /**
      * @return the metricData
      */
-    public Map<String, LRUCache<Long, Metric>> getMetricData() {
-        return metricData_;
+    public AggregatedMetricData getCustomMetricCapacity() 
+    {
+        return customMetricCapacity_;
     }
 
 
@@ -348,7 +354,8 @@ public final class LocalControllerDescription
     /**
      * @param metricData the metricData to set
      */
-    public void setMetricData(Map<String, LRUCache<Long, Metric>> metricData) {
-        metricData_ = metricData;
+    public void setCustomMetricCapacity(AggregatedMetricData customMetricCapacity) 
+    {
+        customMetricCapacity_ = customMetricCapacity;
     }
 }
