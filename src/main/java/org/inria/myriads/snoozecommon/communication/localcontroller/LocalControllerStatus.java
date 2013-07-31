@@ -31,5 +31,7 @@ public enum LocalControllerStatus
     /** Passive. */
     PASSIVE,
     /** Woken up. */
-    WOKENUP
+    WOKENUP,
+    /** Unknown.*/
+    UNKNOWN
 }

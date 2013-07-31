@@ -83,6 +83,7 @@ public final class LocalControllerDescription
         assignedVirtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         totalCapacity_ = new ArrayList<Double>();
         hostname_ = initializeHostname();
+        status_ = LocalControllerStatus.UNKNOWN;
     }
     
    

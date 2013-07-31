@@ -81,9 +81,11 @@ public class VirtualMachineMetaData
     {    
         ipAddress_ = Globals.DEFAULT_INITIALIZATION;
         status_ = VirtualMachineStatus.UNKNOWN; 
+        xmlRepresentation_ = Globals.DEFAULT_INITIALIZATION ;
         errorCode_ = VirtualMachineErrorCode.UNKNOWN;
         location_ = new VirtualMachineLocation();
         usedCapacity_ = new LRUCache<Long, VirtualMachineMonitoringData>();
+        requestedCapacity_ = new ArrayList<Double>();
     }
     
     /**
