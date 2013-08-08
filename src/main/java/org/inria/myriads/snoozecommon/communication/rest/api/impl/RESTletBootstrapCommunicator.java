@@ -19,14 +19,21 @@
  */
 package org.inria.myriads.snoozecommon.communication.rest.api.impl;
 
+import java.util.List;
+
 import org.inria.myriads.snoozecommon.communication.NetworkAddress;
 import org.inria.myriads.snoozecommon.communication.NodeRole;
 import org.inria.myriads.snoozecommon.communication.groupmanager.GroupManagerDescription;
 import org.inria.myriads.snoozecommon.communication.groupmanager.repository.GroupLeaderRepositoryInformation;
+import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerList;
 import org.inria.myriads.snoozecommon.communication.rest.api.BootstrapAPI;
 import org.inria.myriads.snoozecommon.communication.rest.util.RESTUtil;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
+import org.inria.myriads.snoozecommon.request.HostListRequest;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.Get;
+import org.restlet.resource.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -129,5 +136,71 @@ public final class RESTletBootstrapCommunicator
             }
         }
         return hierarchy;    
+    }
+
+    @Override
+    @Post("?destroyVirtualMachine")
+    public boolean destroyVirtualMachine(String virtualMachineId) 
+    {
+        log_.error("Not implemented yet");
+        return false;
+    }
+
+    @Override
+    @Post("?suspendVirtualMachine")
+    public boolean suspendVirtualMachine(String virtualMachineId) 
+    {
+        log_.error("Not implemented yet");
+        return false;
+    }
+
+    @Override
+    public boolean rebootVirtualMachine(String id) 
+    {
+        log_.error("Not implemented yet");
+        return false;
+    }
+
+    @Override
+    
+    public boolean shutdownVirtualMachine(String virtualMachineId) 
+    {
+        log_.error("Not implemented yet");
+        return false;
+    }
+
+    @Override
+    public boolean resumeVirtualMachine(String virtualMachineId) 
+    {
+        log_.error("Not implemented yet");
+        return false;
+    }
+
+    @Override
+    public boolean migrateVirtualMachine(String virtualMachineId, String LocalControllerId) 
+    {
+        log_.error("Not implemented yet");
+        return false;
+    }
+
+    @Override
+    public String startVirtualCluster(VirtualClusterSubmissionRequest virtualClusterDescription) 
+    {
+        log_.error("Not implemented yet");
+        return null;
+    }
+
+    @Override    
+    public List<GroupManagerDescription> getGroupManagerDescriptions(HostListRequest hostListRequest) 
+    {
+        log_.error("Not implemented yet");
+        return null;
+    }
+
+    @Override
+    public LocalControllerList geLocalControllerList() 
+    {
+        log_.error("Not implemented yet");
+        return null;
     }
 }

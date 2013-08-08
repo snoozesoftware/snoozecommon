@@ -19,9 +19,16 @@
  */
 package org.inria.myriads.snoozecommon.communication.rest.api;
 
+import java.util.List;
+
 import org.inria.myriads.snoozecommon.communication.groupmanager.GroupManagerDescription;
 import org.inria.myriads.snoozecommon.communication.groupmanager.repository.GroupLeaderRepositoryInformation;
+import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerList;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
+import org.inria.myriads.snoozecommon.request.HostListRequest;
 import org.restlet.resource.Get;
+import org.restlet.resource.Post;
 
 /**
  * Bootstrap resource interface.
@@ -49,5 +56,82 @@ public interface BootstrapAPI
      * */
     @Get("?getCompleteHierarchy")
     GroupLeaderRepositoryInformation getCompleteHierarchy();
+    
+    
+    /**
+     * Routine to destroy a virtual machine.
+     * 
+     * @param virtualMachineId   The virtual machine identifier
+     * @return                   true if everything ok, false otherwise
+     */
+    @Post("?destroyVirtualMachine")
+    boolean destroyVirtualMachine(String virtualMachineId);
+    
+    /**
+     * Routine to suspend a virtual machine on request.
+     * 
+     * @param virtualMachineId   The virtual machine identifier
+     * @return                   true if everything ok, false otherwise
+     */
+    @Post("?suspendVirtualMachine")
+    boolean suspendVirtualMachine(String virtualMachineId);
+    
+    /**
+     * Routine to reboot a virtual machine.
+     * 
+     * @param id   The virtual machine identifier
+     * @return     true if everything ok, false otherwise
+     */
+    @Post("?rebootVirtualMachine")
+    boolean rebootVirtualMachine(String id);
+    
+    /**
+     * Routine to shutdown a virtual machine.
+     * 
+     * @param virtualMachineId   The virtual machine identifier
+     * @return                   true if everything ok, false otherwise
+     */
+    @Post("?shutdownVirtualMachine")
+    boolean shutdownVirtualMachine(String virtualMachineId);
+    
+    /**
+     * Routine to resume a virtual machine.
+     * 
+     * @param virtualMachineId   The virtual machine identifier
+     * @return                   true if everything ok, false otherwise
+     */
+    @Post("?resumeVirtualMachine")
+    boolean resumeVirtualMachine(String virtualMachineId);
+    
+    /**
+     * Routine to migrate a virtual machine.
+     * 
+     * @param migrationRequest   The migration request
+     * @return                   true if everything ok, false otherwise
+     */
+    @Post("?migrateVirtualMachine")
+    boolean migrateVirtualMachine(String virtualMachineId, String LocalControllerId);
+
+    /**
+     * Routine to start a virtual cluster.
+     * 
+     */
+    @Post("?startVirtualCluster")
+    String startVirtualCluster(VirtualClusterSubmissionRequest virtualClusterDescription);
+
+    
+    @Get("?getLocalControllerList")
+    LocalControllerList geLocalControllerList();
+    
+    /**
+     * 
+     * Gets the group manager list.
+     * (administration purpose)
+     * 
+     * @param hostListRequest
+     * @return
+     */
+    @Get("?getGroupManagerDescriptions")
+    List<GroupManagerDescription> getGroupManagerDescriptions(HostListRequest hostListRequest);
     
 }

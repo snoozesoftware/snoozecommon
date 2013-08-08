@@ -2,6 +2,7 @@ package org.inria.myriads.snoozecommon.communication.localcontroller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,20 @@ public class LocalControllerList implements Serializable
             ArrayList<LocalControllerDescription> localControllers)
     {
         localControllers_ = localControllers;
+    }
+
+
+    public LocalControllerList(
+            HashMap<String, LocalControllerDescription> localControllers) 
+    {
+        localControllers_ = new ArrayList<LocalControllerDescription>();
+        
+        for (LocalControllerDescription localController : localControllers.values())
+        {
+            localControllers_.add(localController);
+        }
+        
+        
     }
 
 
