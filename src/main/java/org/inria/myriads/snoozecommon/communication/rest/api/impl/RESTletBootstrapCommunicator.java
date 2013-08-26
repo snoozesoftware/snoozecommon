@@ -25,9 +25,12 @@ import org.inria.myriads.snoozecommon.communication.NetworkAddress;
 import org.inria.myriads.snoozecommon.communication.NodeRole;
 import org.inria.myriads.snoozecommon.communication.groupmanager.GroupManagerDescription;
 import org.inria.myriads.snoozecommon.communication.groupmanager.repository.GroupLeaderRepositoryInformation;
+import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerDescription;
 import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerList;
 import org.inria.myriads.snoozecommon.communication.rest.api.BootstrapAPI;
 import org.inria.myriads.snoozecommon.communication.rest.util.RESTUtil;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.ClientMigrationRequestSimple;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.inria.myriads.snoozecommon.request.HostListRequest;
@@ -177,7 +180,7 @@ public final class RESTletBootstrapCommunicator
     }
 
     @Override
-    public boolean migrateVirtualMachine(String virtualMachineId, String LocalControllerId) 
+    public boolean migrateVirtualMachine(ClientMigrationRequestSimple migrationRequest) 
     {
         log_.error("Not implemented yet");
         return false;
@@ -201,6 +204,21 @@ public final class RESTletBootstrapCommunicator
     public LocalControllerList geLocalControllerList() 
     {
         log_.error("Not implemented yet");
+        return null;
+    }
+
+    @Override
+    
+    public List<LocalControllerDescription> getLocalControllerDescriptions(HostListRequest hostListRequest) 
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<VirtualMachineMetaData> getVirtualMachineDescriptions(HostListRequest hostListRequest) 
+    {
+        // TODO Auto-generated method stub
         return null;
     }
 }

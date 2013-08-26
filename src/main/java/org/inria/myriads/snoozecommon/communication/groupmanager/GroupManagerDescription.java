@@ -62,6 +62,9 @@ public class GroupManagerDescription
     
     /** Hostname.*/
     private String hostname_;
+    
+    /** isAssigned to a running GroupLeader.*/
+    private boolean isAssigned_;
        
     /** Assigned virtual machines. */
     private ArrayList<VirtualMachineMetaData> virtualMachines_;
@@ -80,7 +83,8 @@ public class GroupManagerDescription
         virtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         summary_ = new LRUCache<Long, GroupManagerSummaryInformation>();
         localControllers_ = new HashMap<String, LocalControllerDescription>();
-        hostname_ = initializeHostname(); 
+        hostname_ = initializeHostname();
+        isAssigned_ = false;
     }
        
   
@@ -100,6 +104,7 @@ public class GroupManagerDescription
         summary_ = groupManager.getGroupManagerSummaryData(numberOfBacklogEntries);
         localControllers_ = new HashMap<String, LocalControllerDescription>(groupManager.getLocalControllers());
         hostname_ = groupManager.getHostname();
+        isAssigned_ = groupManager.getIsAssigned();
     }
 
     
@@ -248,6 +253,19 @@ public class GroupManagerDescription
     }
     
     /**
+     * Sets the local controller descriptions.
+     * 
+     * @param localControllers   The local controller descriptions
+     */
+    public void setLocalControllersFromArray(ArrayList<LocalControllerDescription> localControllers) 
+    {
+        for (LocalControllerDescription localController : localControllers)
+        {
+            localControllers_.put(localController.getId(), localController);
+        }
+    }
+    
+    /**
      * Returns the local controller descriptions.
      * 
      * @return  The local controller descriptions
@@ -291,5 +309,23 @@ public class GroupManagerDescription
     public void setHostname(String hostname) 
     {
         hostname_ = hostname;
+    }
+
+
+    /**
+     * @return the isAssigned
+     */
+    public boolean getIsAssigned() 
+    {
+        return isAssigned_;
+    }
+
+
+    /**
+     * @param isAssigned the isAssigned to set
+     */
+    public void setIsAssigned(boolean isAssigned) 
+    {
+        isAssigned_ = isAssigned;
     }
 }

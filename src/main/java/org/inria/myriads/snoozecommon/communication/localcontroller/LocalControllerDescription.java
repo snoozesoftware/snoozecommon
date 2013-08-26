@@ -55,11 +55,17 @@ public final class LocalControllerDescription
     /** Hostname. */
     private String hostname_;
     
+    /** isAssigned to a running groupmanager.*/
+    private boolean isAssigned_;
+    
     /** Hypervisor settings. */
     private HypervisorSettings hypervisorSettings_;
     
     /** Wakeup settings. */
     private WakeupSettings wakeupSettings_;
+    
+    /** LocalController location.*/
+    private LocalControllerLocation location_; 
     
     /** Virtual machine meta data. */
     private HashMap<String, VirtualMachineMetaData> virtualMachineMetaData_;
@@ -84,6 +90,8 @@ public final class LocalControllerDescription
         totalCapacity_ = new ArrayList<Double>();
         hostname_ = initializeHostname();
         status_ = LocalControllerStatus.UNKNOWN;
+        isAssigned_ = false;
+        location_ = new LocalControllerLocation();
     }
     
    
@@ -116,6 +124,8 @@ public final class LocalControllerDescription
         assignedVirtualMachines_ = new ArrayList<VirtualMachineMetaData>();
         totalCapacity_ = new ArrayList<Double>(original.getTotalCapacity());
         hostname_ = original.getHostname();
+        isAssigned_ = original.getIsAssigned();
+        location_ = new LocalControllerLocation(original.getLocation());
     }
     
     /**
@@ -335,5 +345,52 @@ public final class LocalControllerDescription
     public void setHostname(String hostname) 
     {
         hostname_ = hostname;
+    }
+
+
+
+    /**
+     * @return the isAssigned
+     */
+    public boolean getIsAssigned() 
+    {
+        return isAssigned_;
+    }
+
+
+
+    /**
+     * @param isAssigned the isAssigned to set
+     */
+    public void setIsAssigned(boolean isAssigned) 
+    {
+        isAssigned_ = isAssigned;
+    }
+
+
+    /**
+     * @param isAssigned the isAssigned to set
+     */
+    public void setAssigned(boolean isAssigned) 
+    {
+        isAssigned_ = isAssigned;
+    }
+
+
+
+    /**
+     * @return the location
+     */
+    public LocalControllerLocation getLocation() {
+        return location_;
+    }
+
+
+
+    /**
+     * @param location the location to set
+     */
+    public void setLocation(LocalControllerLocation location) {
+        location_ = location;
     }
 }

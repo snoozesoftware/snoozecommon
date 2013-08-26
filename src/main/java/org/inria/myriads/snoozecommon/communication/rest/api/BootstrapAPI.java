@@ -23,7 +23,10 @@ import java.util.List;
 
 import org.inria.myriads.snoozecommon.communication.groupmanager.GroupManagerDescription;
 import org.inria.myriads.snoozecommon.communication.groupmanager.repository.GroupLeaderRepositoryInformation;
+import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerDescription;
 import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerList;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.ClientMigrationRequestSimple;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
 import org.inria.myriads.snoozecommon.request.HostListRequest;
@@ -110,7 +113,7 @@ public interface BootstrapAPI
      * @return                   true if everything ok, false otherwise
      */
     @Post("?migrateVirtualMachine")
-    boolean migrateVirtualMachine(String virtualMachineId, String LocalControllerId);
+    boolean migrateVirtualMachine(ClientMigrationRequestSimple migrationRequest);
 
     /**
      * Routine to start a virtual cluster.
@@ -131,7 +134,29 @@ public interface BootstrapAPI
      * @param hostListRequest
      * @return
      */
-    @Get("?getGroupManagerDescriptions")
+    @Post("?getGroupManagerDescriptions")
     List<GroupManagerDescription> getGroupManagerDescriptions(HostListRequest hostListRequest);
+    
+    /**
+     * 
+     * Gets the local controller list.
+     * (administration purpose)
+     * 
+     * @param hostListRequest
+     * @return
+     */
+    @Post("?getLocalControllerDescriptions")
+    List<LocalControllerDescription> getLocalControllerDescriptions(HostListRequest hostListRequest);
+    
+    /**
+     * 
+     * Gets the virtual machine List.
+     * (administration purpose)
+     * 
+     * @param hostListRequest
+     * @return
+     */
+    @Post("?getVirtualMachineDescriptions")
+    List<VirtualMachineMetaData> getVirtualMachineDescriptions(HostListRequest hostListRequest);
     
 }

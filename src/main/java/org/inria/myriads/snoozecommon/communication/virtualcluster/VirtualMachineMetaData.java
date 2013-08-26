@@ -63,6 +63,9 @@ public class VirtualMachineMetaData
     /** Error code. */
     private VirtualMachineErrorCode errorCode_;
     
+    /** isAssigned.*/
+    private boolean isAssigned_;
+    
     /** Local Controller Location. */
     private VirtualMachineLocation location_;
                 
@@ -86,6 +89,7 @@ public class VirtualMachineMetaData
         location_ = new VirtualMachineLocation();
         usedCapacity_ = new LRUCache<Long, VirtualMachineMonitoringData>();
         requestedCapacity_ = new ArrayList<Double>();
+        isAssigned_ = false;
     }
     
     /**
@@ -104,6 +108,7 @@ public class VirtualMachineMetaData
         usedCapacity_ = metaData.getMonitoringData(numberOfMonitoringEntries);
         requestedCapacity_ = new ArrayList<Double>(metaData.getRequestedCapacity());
         xmlRepresentation_ = metaData.getXmlRepresentation();
+        isAssigned_ = metaData.getIsAssigned();
     }
 
     /**
@@ -298,6 +303,22 @@ public class VirtualMachineMetaData
     public String getIpAddress()
     {
         return ipAddress_;
+    }
+
+    /**
+     * @return the isAssigned
+     */
+    public boolean getIsAssigned() 
+    {
+        return isAssigned_;
+    }
+
+    /**
+     * @param isAssigned the isAssigned to set
+     */
+    public void setIsAssigned(boolean isAssigned) 
+    {
+        isAssigned_ = isAssigned;
     }
 
 }

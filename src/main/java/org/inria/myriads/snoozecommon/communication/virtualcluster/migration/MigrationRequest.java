@@ -44,7 +44,7 @@ public final class MigrationRequest
     /** Destination hypervisor settings. */
     private HypervisorSettings destinationHypervisorSettings_;
     
-    /** Indeicates migration success. */
+    /** Indicates migration success. */
     private boolean isMigrated_;
     
     /**
