@@ -47,6 +47,12 @@ public class LocalControllerList implements Serializable
     }
 
 
+    /**
+     * 
+     *  "Copy" constructor.
+     * 
+     * @param localControllers      localcontrollers.
+     */
     public LocalControllerList(
             HashMap<String, LocalControllerDescription> localControllers) 
     {

@@ -5,6 +5,13 @@ import java.io.Serializable;
 import org.inria.myriads.snoozecommon.communication.NetworkAddress;
 import org.inria.myriads.snoozecommon.globals.Globals;
 
+/**
+ * 
+ * Local Controller Location.
+ * 
+ * @author msimonin
+ *
+ */
 public class LocalControllerLocation implements Serializable 
 {
     /** Default version. */
@@ -34,6 +41,8 @@ public class LocalControllerLocation implements Serializable
     /**
      * 
      * copy constructor.
+     * 
+     * @param   original    Original to copy.
      * 
      */
     public LocalControllerLocation(LocalControllerLocation original)

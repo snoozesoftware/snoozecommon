@@ -38,11 +38,9 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineLocation;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
-import org.inria.myriads.snoozecommon.communication.virtualmachine.ClientMigrationRequest;
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.restlet.resource.ClientResource;
-import org.restlet.resource.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -854,7 +852,7 @@ public final class RESTletGroupManagerCommunicator
     /**
      * Migrate a virtual machine.
      * (call by the client)
-     * @param clientMigrationRequest     The client migration Request
+     * @param migrationRequest      The client migration Request
      * @return                           true if ok false otherwise
      */
     public boolean migrateVirtualMachine(MigrationRequest migrationRequest) 
@@ -950,12 +948,9 @@ public final class RESTletGroupManagerCommunicator
         return null;
     }
 
-    /** 
-     * 
-     */
-    @Override
     
-    public boolean addVirtualMachineAfterMigration(VirtualMachineMetaData virtualMachine) 
+    @Override
+    public boolean addVirtualMachineAfterMigration(VirtualMachineMetaData virtualMachine)
     {
         log_.debug("Sending add virtual machine request to groupmanager");     
         
@@ -982,4 +977,63 @@ public final class RESTletGroupManagerCommunicator
         return false;
     }
 
+    @Override
+    public GroupManagerDescription getGroupManagerDescription(
+            String groupManagerId) 
+    {
+
+        log_.debug("Sending a groupmanager lookup to the groupleader " + groupManagerId);     
+        
+        ClientResource clientResource = null;
+        
+        try
+        {
+            clientResource = createClientResource();
+            GroupManagerAPI groupManagerResource = clientResource.wrap(GroupManagerAPI.class);
+            log_.debug("Sending the request to the groupleader ");
+            return  groupManagerResource.getGroupManagerDescription(groupManagerId);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting group manager", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        
+        return null;
+    }
+
+    @Override
+    public LocalControllerDescription getLocalControllerDescription(String localControllerId) 
+    {
+
+        log_.debug("Sending a localcontroller lookup to the groupmanager " + localControllerId);     
+        
+        ClientResource clientResource = null;
+        
+        try
+        {
+            clientResource = createClientResource();
+            GroupManagerAPI groupManagerResource = clientResource.wrap(GroupManagerAPI.class);
+            log_.debug("Sending the request to the groupmanager ");
+            return  groupManagerResource.getLocalControllerDescription(localControllerId);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting group manager", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }    
+        return null;
+    }
 }

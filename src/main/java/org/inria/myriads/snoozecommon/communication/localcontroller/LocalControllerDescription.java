@@ -379,18 +379,26 @@ public final class LocalControllerDescription
 
 
     /**
+     * 
+     * Gets the location.
+     * 
      * @return the location
      */
-    public LocalControllerLocation getLocation() {
+    public LocalControllerLocation getLocation() 
+    {
         return location_;
     }
 
 
 
     /**
+     * 
+     * Sets the location.
+     * 
      * @param location the location to set
      */
-    public void setLocation(LocalControllerLocation location) {
+    public void setLocation(LocalControllerLocation location) 
+    {
         location_ = location;
     }
 }

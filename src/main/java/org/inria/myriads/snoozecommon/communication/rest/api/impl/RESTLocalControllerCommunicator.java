@@ -19,6 +19,8 @@
  */
 package org.inria.myriads.snoozecommon.communication.rest.api.impl;
 
+import java.util.List;
+
 import org.inria.myriads.snoozecommon.communication.NetworkAddress;
 import org.inria.myriads.snoozecommon.communication.NodeRole;
 import org.inria.myriads.snoozecommon.communication.rest.api.LocalControllerAPI;
@@ -554,6 +556,35 @@ public final class RESTLocalControllerCommunicator
         }
         
         return isStarted;
+    }
+
+    @Override
+    public List<VirtualMachineMetaData> getVirtualMachines(int numberOfMonitoringEntries) 
+    {
+        
+        log_.debug("Sending virtual machines list to localcontroller");
+        
+        ClientResource clientResource = null;
+        boolean isStarted = false;
+        try
+        {
+            clientResource = createClientResource();
+            LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
+            return localControllerResource.getVirtualMachines(numberOfMonitoringEntries);
+        } 
+        catch (Exception exception)
+        {
+            log_.debug("Error during virtual machine monitoring start", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        
+        return null;
     }
 
 

@@ -1,9 +1,17 @@
 package org.inria.myriads.snoozecommon.request;
 
-public class HostListRequest {
+/**
+ * 
+ * Host list request.
+ * 
+ * @author msimonin
+ *
+ */
+public class HostListRequest 
+{
 
    /** start. */
-   private String start_ ; 
+   private String start_;
    
    /** Limit. */
    private int limit_;

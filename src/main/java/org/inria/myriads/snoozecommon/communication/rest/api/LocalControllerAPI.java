@@ -19,6 +19,8 @@
  */
 package org.inria.myriads.snoozecommon.communication.rest.api;
 
+import java.util.List;
+
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
@@ -159,5 +161,15 @@ public interface LocalControllerAPI
      */
     @Post("?resizeVirtualMachine")
     VirtualMachineMetaData resizeVirtualMachine(ResizeRequest resizeRequest);
+
+    /**
+     * 
+     * Gets virtual machine meta datas.
+     * 
+     * @param numberOfMonitoringEntries     number of monitoring entries.
+     * @return  List of Virtual Machine Meta Data
+     */
+    @Post("?getVirtualMachines")
+    List<VirtualMachineMetaData> getVirtualMachines(int numberOfMonitoringEntries); 
 
 }

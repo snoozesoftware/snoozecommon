@@ -35,7 +35,6 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineLocation;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
-import org.inria.myriads.snoozecommon.communication.virtualmachine.ClientMigrationRequest;
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
@@ -192,7 +191,7 @@ public interface GroupManagerAPI
      * @param virtualMachineId     The virtual machine identifier
      * @return                     The local controller identifier
      */
-    @Post("?getLocalControllerDescription") 
+    @Post("?searchVirtualMachine") 
     String searchVirtualMachine(String virtualMachineId);
         
     /**
@@ -252,7 +251,7 @@ public interface GroupManagerAPI
      * Migrate a virtual machine.
      * (call by the client)
      * 
-     * @param clientMigrationRequest     The client migration Request
+     * @param migrationRequest     The client migration Request
      * @return                           true if ok false otherwise
      */
     @Post("?migrateVirtualMachine")
@@ -285,12 +284,33 @@ public interface GroupManagerAPI
      * Request to add a new virtual machine after a successful migration.
      * 
      * @param virtualMachine    The virtual machine meta data.
-     * @return
+     * @return  true iff everything is ok.
      */
-    @Post("addVirtualMachineAfterMigration")
+    @Post("?addVirtualMachineAfterMigration")
     boolean addVirtualMachineAfterMigration(
             VirtualMachineMetaData virtualMachine);
-    
 
+    
+    /**
+     * 
+     * Gets a groupManager description from the groupLeader.
+     * 
+     * @param groupManagerId        group manager Id.
+     * @return Group manager Description.
+     */
+    @Post("?getGroupManagerDescription")
+    GroupManagerDescription getGroupManagerDescription(String groupManagerId);
+    
+    /**
+     * 
+     * Gets a local controller description form a group manager.
+     * 
+     * @param localControllerId     local controller id.
+     * @return  Local Controller Description.
+     */
+    @Post("?getLocalControllerDescription")
+    LocalControllerDescription getLocalControllerDescription(String localControllerId);
+
+    
 }
 

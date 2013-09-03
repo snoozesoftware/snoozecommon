@@ -35,7 +35,6 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.inria.myriads.snoozecommon.request.HostListRequest;
 import org.restlet.resource.ClientResource;
-import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -211,14 +210,12 @@ public final class RESTletBootstrapCommunicator
     
     public List<LocalControllerDescription> getLocalControllerDescriptions(HostListRequest hostListRequest) 
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public List<VirtualMachineMetaData> getVirtualMachineDescriptions(HostListRequest hostListRequest) 
     {
-        // TODO Auto-generated method stub
         return null;
     }
 }

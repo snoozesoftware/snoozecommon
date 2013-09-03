@@ -27,7 +27,6 @@ import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControl
 import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControllerList;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.ClientMigrationRequestSimple;
-import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.MigrationRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
 import org.inria.myriads.snoozecommon.request.HostListRequest;
 import org.restlet.resource.Get;
@@ -118,11 +117,20 @@ public interface BootstrapAPI
     /**
      * Routine to start a virtual cluster.
      * 
+     * @param virtualClusterDescription     The virtual cluster description.
+     * @return String task identifier.
      */
     @Post("?startVirtualCluster")
     String startVirtualCluster(VirtualClusterSubmissionRequest virtualClusterDescription);
 
     
+    
+    /**
+     * 
+     * Gets the local controller list.
+     * 
+     * @return LocalController list.
+     */
     @Get("?getLocalControllerList")
     LocalControllerList geLocalControllerList();
     
@@ -131,8 +139,8 @@ public interface BootstrapAPI
      * Gets the group manager list.
      * (administration purpose)
      * 
-     * @param hostListRequest
-     * @return
+     * @param hostListRequest       host list request.
+     * @return  groupmanager list
      */
     @Post("?getGroupManagerDescriptions")
     List<GroupManagerDescription> getGroupManagerDescriptions(HostListRequest hostListRequest);
@@ -142,8 +150,8 @@ public interface BootstrapAPI
      * Gets the local controller list.
      * (administration purpose)
      * 
-     * @param hostListRequest
-     * @return
+     * @param hostListRequest       host list request.
+     * @return local controller list.
      */
     @Post("?getLocalControllerDescriptions")
     List<LocalControllerDescription> getLocalControllerDescriptions(HostListRequest hostListRequest);
@@ -153,8 +161,8 @@ public interface BootstrapAPI
      * Gets the virtual machine List.
      * (administration purpose)
      * 
-     * @param hostListRequest
-     * @return
+     * @param hostListRequest      host list request.
+     * @return virtual machine list.
      */
     @Post("?getVirtualMachineDescriptions")
     List<VirtualMachineMetaData> getVirtualMachineDescriptions(HostListRequest hostListRequest);

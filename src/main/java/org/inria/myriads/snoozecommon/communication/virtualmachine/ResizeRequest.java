@@ -22,7 +22,6 @@ package org.inria.myriads.snoozecommon.communication.virtualmachine;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineLocation;
 
