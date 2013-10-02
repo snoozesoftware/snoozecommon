@@ -1036,4 +1036,29 @@ public final class RESTletGroupManagerCommunicator
         }    
         return null;
     }
+
+    @Override
+    public boolean startReconfiguration() 
+    {
+        log_.debug("Sending a groupmanager start reconfiguration request");     
+        ClientResource clientResource = null;
+        try
+        {
+            clientResource = createClientResource();
+            GroupManagerAPI groupManagerResource = clientResource.wrap(GroupManagerAPI.class);
+            return  groupManagerResource.startReconfiguration();
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting group manager", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }    
+        return false;
+    }
 }

@@ -120,10 +120,19 @@ public interface BootstrapAPI
      * @param virtualClusterDescription     The virtual cluster description.
      * @return String task identifier.
      */
+    
     @Post("?startVirtualCluster")
     String startVirtualCluster(VirtualClusterSubmissionRequest virtualClusterDescription);
 
-    
+    /**
+     * 
+     * Start a reconfiguration on the given groupmanager.
+     * 
+     * @param groupManagerId    The group manager id.
+     * @return  True if everything is ok.
+     */
+    @Post("?startReconfiguration")
+    boolean startReconfiguration(String groupManagerId);
     
     /**
      * 
