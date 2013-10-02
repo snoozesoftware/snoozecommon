@@ -28,6 +28,7 @@ import org.inria.myriads.snoozecommon.communication.localcontroller.LocalControl
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.ClientMigrationRequestSimple;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionResponse;
 import org.inria.myriads.snoozecommon.request.HostListRequest;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
@@ -176,4 +177,13 @@ public interface BootstrapAPI
     @Post("?getVirtualMachineDescriptions")
     List<VirtualMachineMetaData> getVirtualMachineDescriptions(HostListRequest hostListRequest);
     
+    
+    /**
+     * Returns the virtual cluster response.
+     * 
+     * @param taskIdentifier    The task identifier
+     * @return                  The virtual cluster response
+     */
+    @Post("?getVirtualClusterResponse")
+    VirtualClusterSubmissionResponse getVirtualClusterResponse(String taskIdentifier);
 }
