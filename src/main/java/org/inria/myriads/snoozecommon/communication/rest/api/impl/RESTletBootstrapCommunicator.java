@@ -32,6 +32,7 @@ import org.inria.myriads.snoozecommon.communication.rest.util.RESTUtil;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.ClientMigrationRequestSimple;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
+import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionResponse;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.inria.myriads.snoozecommon.request.HostListRequest;
 import org.restlet.resource.ClientResource;
@@ -224,5 +225,12 @@ public final class RESTletBootstrapCommunicator
     {
         log_.error("Not implemented yet");
         return false;
+    }
+
+    @Override
+    public VirtualClusterSubmissionResponse getVirtualClusterResponse(String taskIdentifier) 
+    {
+        log_.error("Not implemented");
+        return null;
     }
 }
