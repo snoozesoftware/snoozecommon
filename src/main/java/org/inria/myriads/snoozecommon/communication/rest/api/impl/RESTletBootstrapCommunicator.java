@@ -218,4 +218,11 @@ public final class RESTletBootstrapCommunicator
     {
         return null;
     }
+
+    @Override    
+    public boolean startReconfiguration(String groupManagerId) 
+    {
+        log_.error("Not implemented yet");
+        return false;
+    }
 }

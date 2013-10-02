@@ -312,5 +312,14 @@ public interface GroupManagerAPI
     LocalControllerDescription getLocalControllerDescription(String localControllerId);
 
     
+    /**
+     * 
+     * starts a reconfiguration.
+     * 
+     * @return  True if everything is ok.
+     */
+    @Post("?startReconfiguration")
+    boolean startReconfiguration();
+    
 }
 
