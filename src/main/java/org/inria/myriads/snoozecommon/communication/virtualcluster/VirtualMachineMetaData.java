@@ -34,6 +34,7 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.datastructure.LRUCache;
 import org.inria.myriads.snoozecommon.globals.Globals;
 import org.inria.myriads.snoozecommon.guard.Guard;
+import org.inria.myriads.snoozecommon.virtualmachineimage.VirtualMachineImage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,6 +69,9 @@ public class VirtualMachineMetaData
     
     /** Local Controller Location. */
     private VirtualMachineLocation location_;
+    
+    /** Virtual Machine Image. */
+    private VirtualMachineImage image_;
                 
     /** Group Manager Location. */
     
@@ -319,6 +323,20 @@ public class VirtualMachineMetaData
     public void setIsAssigned(boolean isAssigned) 
     {
         isAssigned_ = isAssigned;
+    }
+
+    /**
+     * @return the image
+     */
+    public VirtualMachineImage getImage() {
+        return image_;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(VirtualMachineImage image) {
+        image_ = image;
     }
 
 }
