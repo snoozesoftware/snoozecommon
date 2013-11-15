@@ -19,6 +19,7 @@
  */
 package org.inria.myriads.snoozecommon.communication.rest.api.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.inria.myriads.snoozecommon.communication.NetworkAddress;
@@ -33,6 +34,7 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachin
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.ClientMigrationRequestSimple;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionResponse;
+import org.inria.myriads.snoozecommon.communication.virtualmachine.VirtualMachinesList;
 import org.inria.myriads.snoozecommon.guard.Guard;
 import org.inria.myriads.snoozecommon.request.HostListRequest;
 import org.restlet.resource.ClientResource;
@@ -145,8 +147,28 @@ public final class RESTletBootstrapCommunicator
     @Post("?destroyVirtualMachine")
     public boolean destroyVirtualMachine(String virtualMachineId) 
     {
-        log_.error("Not implemented yet");
-        return false;
+        log_.debug("Destroying virtual machine");
+        
+        ClientResource clientResource = null;
+        boolean isDestroyed = false;
+        try
+        {
+            clientResource = createClientResource();
+            BootstrapAPI bootstrapResource = clientResource.wrap(BootstrapAPI.class); 
+            isDestroyed = bootstrapResource.destroyVirtualMachine(virtualMachineId);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting bootstrap", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return isDestroyed;    
     }
 
     @Override
@@ -160,8 +182,28 @@ public final class RESTletBootstrapCommunicator
     @Override
     public boolean rebootVirtualMachine(String id) 
     {
-        log_.error("Not implemented yet");
-        return false;
+        log_.debug("Rebooting a virtual machine");
+        
+        ClientResource clientResource = null;
+        boolean isRebooted = false;
+        try
+        {
+            clientResource = createClientResource();
+            BootstrapAPI bootstrapResource = clientResource.wrap(BootstrapAPI.class); 
+            isRebooted = bootstrapResource.rebootVirtualMachine(id);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting bootstrap", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return isRebooted;  
     }
 
     @Override
@@ -189,8 +231,28 @@ public final class RESTletBootstrapCommunicator
     @Override
     public String startVirtualCluster(VirtualClusterSubmissionRequest virtualClusterDescription) 
     {
-        log_.error("Not implemented yet");
-        return null;
+        log_.debug("Requesting group leader from bootstrap node");
+        
+        ClientResource clientResource = null;
+        String requestId = null;
+        try
+        {
+            clientResource = createClientResource();
+            BootstrapAPI bootstrapResource = clientResource.wrap(BootstrapAPI.class); 
+            requestId = bootstrapResource.startVirtualCluster(virtualClusterDescription);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting bootstrap", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return requestId;    
     }
 
     @Override    
@@ -215,9 +277,30 @@ public final class RESTletBootstrapCommunicator
     }
 
     @Override
-    public List<VirtualMachineMetaData> getVirtualMachineDescriptions(HostListRequest hostListRequest) 
+    public VirtualMachinesList getVirtualMachineDescriptions(HostListRequest hostListRequest) 
     {
-        return null;
+        log_.debug("Requesting group leader from bootstrap node");
+        
+        ClientResource clientResource = null;
+        VirtualMachinesList virtualMachines = new VirtualMachinesList();
+        try
+        {
+            clientResource = createClientResource();
+            BootstrapAPI bootstrapResource = clientResource.wrap(BootstrapAPI.class); 
+            virtualMachines = bootstrapResource.getVirtualMachineDescriptions(hostListRequest);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting bootstrap", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return virtualMachines;  
     }
 
     @Override    

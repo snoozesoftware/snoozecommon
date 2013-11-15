@@ -20,4 +20,4 @@
 #
 
 mvn package
-mvn install
+mvn install -Dmaven.test.skip=true

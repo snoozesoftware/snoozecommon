@@ -46,7 +46,12 @@ public final class Globals
     
     /** Default Memory demand (for resize).*/
     public static final double DEFAULT_MEMORY = 512000;
+
+    /** Default vcpu initialization (submission request)*/
+    public static final int DEFAULT_VCPU_INITIALIZATION = 1;
     
+    /** Default memory initialization (submission request)*/
+    public static final long DEFAULT_MEMORY_INITIALIZATION = 1024*128;
     
     /** Hide constructor. */
     private Globals()

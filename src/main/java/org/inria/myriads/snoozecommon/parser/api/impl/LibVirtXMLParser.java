@@ -26,6 +26,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.inria.myriads.snoozecommon.communication.localcontroller.hypervisor.HypervisorDriver;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.monitoring.NetworkDemand;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
@@ -37,6 +38,7 @@ import org.inria.myriads.snoozecommon.guard.Guard;
 import org.inria.myriads.snoozecommon.parser.api.VirtualClusterParser;
 import org.inria.myriads.snoozecommon.parser.util.VirtualClusterParserUtils;
 import org.inria.myriads.snoozecommon.util.MathUtils;
+import org.inria.myriads.snoozecommon.virtualmachineimage.VirtualMachineImage;
 
 
 import org.slf4j.Logger;
@@ -357,5 +359,62 @@ public final class LibVirtXMLParser
         }
         
         
+    }
+
+
+    @Override
+    public String addDiskImage(String xmlDesc, VirtualMachineImage image) 
+    {
+        // not implemented here.
+        return null;
+    }
+
+    @Override
+    public String addSerial(String xmlDescription, String type, String targetPort) 
+    {
+        log_.debug("Adding a serial is not implemented for this parser");
+        return xmlDescription;
+    }
+
+    @Override
+    public String addConsole(String xmlDescription, String type,
+            String targetPort, String targetType) {
+        log_.debug("Adding a console is not implemented for this parser");
+        return xmlDescription;
+    }
+
+    @Override
+    public String setDomainType(String xmlDescription, HypervisorDriver driver) 
+    {
+        log_.debug("Adding a domain type is not implemented for this parser");
+        return xmlDescription;
+    }
+
+    @Override
+    public String setOsType(String xmlDescription, HypervisorDriver driver) 
+    {
+        log_.debug("Adding an os type is not implemented for this parser");
+        return xmlDescription;
+    }
+
+
+    @Override
+    public String addCdRomImage(String xmlDescription, String path) 
+    {
+        log_.debug("Adding an os type is not implemented for this parser");
+        return xmlDescription;
+    }
+
+    @Override
+    public VirtualMachineImage getFirstDiskImage(String xmlDescription) 
+    {
+        log_.debug("Getting the first disk image isn't implemented for this parser.");
+        return null;
+    }
+
+    @Override
+    public String removeDisk(String xmlRepresentation, String name) {
+        log_.debug("Removing the disk image isn't implemented for this parser.");
+        return null;
     }
 }
