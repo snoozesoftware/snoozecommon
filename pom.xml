@@ -135,10 +135,16 @@
     </repository>
     
     <repository>
-		<id>snooze repo</id>
+		  <id>snooze repository snapshots</id>
 	    <name>snooze repo</name>
 	    <url>http://snooze.inria.fr/maven/snapshots</url>
-	</repository>
+    </repository>
+
+    <repository>
+		  <id>snooze repository releases</id>
+	    <name>snooze repo</name>
+	    <url>http://snooze.inria.fr/maven/releases</url>
+  	</repository>
     
   </repositories>
       
