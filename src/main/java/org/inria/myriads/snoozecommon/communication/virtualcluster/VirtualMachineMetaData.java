@@ -93,6 +93,7 @@ public class VirtualMachineMetaData
         location_ = new VirtualMachineLocation();
         usedCapacity_ = new LRUCache<Long, VirtualMachineMonitoringData>();
         requestedCapacity_ = new ArrayList<Double>();
+        image_ = new VirtualMachineImage();
         isAssigned_ = false;
     }
     
