@@ -417,4 +417,11 @@ public final class LibVirtXMLParser
         log_.debug("Removing the disk image isn't implemented for this parser.");
         return null;
     }
+
+    @Override
+    public String addGraphics(String xmlDescription, String type, String address, String port)
+    {
+        log_.debug("Adding graphics isn't implemented for this parser.");
+        return null;
+    }
 }

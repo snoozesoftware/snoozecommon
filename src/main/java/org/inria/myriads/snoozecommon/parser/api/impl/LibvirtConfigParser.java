@@ -17,6 +17,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.inria.myriads.libvirt.domain.LibvirtConfigDisk;
 import org.inria.myriads.libvirt.domain.LibvirtConfigDomain;
+import org.inria.myriads.libvirt.domain.LibvirtConfigGraphics;
 import org.inria.myriads.libvirt.domain.LibvirtConfigInterface;
 import org.inria.myriads.libvirt.domain.LibvirtConfigSerialConsole;
 import org.inria.myriads.snoozecommon.communication.NetworkAddress;
@@ -418,7 +419,8 @@ public class LibvirtConfigParser implements VirtualClusterParser
     @Override
     public String removeDisk(String xmlDescription, String name) {
         String newXmlDescription = xmlDescription;
-        try {
+        try 
+        {
             LibvirtConfigDomain domain = unmarshal(xmlDescription);
             ArrayList<LibvirtConfigDisk> disks = domain.getDevices().getDisks();
             Iterator<LibvirtConfigDisk> i = disks.iterator();
@@ -434,6 +436,30 @@ public class LibvirtConfigParser implements VirtualClusterParser
         catch (JAXBException e) 
         {   
             log_.error("Unable remove the disk");
+            e.printStackTrace();
+        }
+        return newXmlDescription;
+    }
+
+    
+    @Override
+    public String addGraphics(String xmlDescription, String type, String address, String port)
+    {
+        String newXmlDescription = xmlDescription;
+        try 
+        {
+            LibvirtConfigDomain domain = unmarshal(xmlDescription);
+            LibvirtConfigGraphics graphics = new LibvirtConfigGraphics();
+            graphics.setType(type)
+            .setListen(address)
+            .setPort(port);
+            domain.addGraphics(graphics);
+            
+            newXmlDescription = marshal(domain);
+        }
+        catch (JAXBException e)
+        {
+            log_.error("Unable to add graphics");
             e.printStackTrace();
         }
         return newXmlDescription;

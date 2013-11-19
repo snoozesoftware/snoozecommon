@@ -177,6 +177,19 @@ public interface VirtualClusterParser
      * @return  the modified xml description.
      */
     String removeDisk(String xmlRepresentation, String name);
+
+
+    /**
+     * 
+     * Adds a graphics.
+     * 
+     * @param xmlDescription
+     * @param type
+     * @param address
+     * @param port
+     * @return
+     */
+    String addGraphics(String xmlDescription, String type, String address, String port);
     
 }
 
