@@ -90,9 +90,11 @@ public interface VirtualClusterParser
      * Adds a disk image to the template.
      * 
      * @param image     The image to add
+     * @param dev 
+     * @param bus 
      * @return          The new template.
      */
-    String addDiskImage(String xmlDesc, VirtualMachineImage image);
+    String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev);
 
     
     /**
@@ -152,9 +154,11 @@ public interface VirtualClusterParser
      * 
      * @param xmlDesc
      * @param path
+     * @param dev 
+     * @param bus 
      * @return
      */
-    String addCdRomImage(String xmlDesc, String path);
+    String addCdRomImage(String xmlDesc, String path, String bus, String dev);
 
 
     /**
@@ -187,9 +191,10 @@ public interface VirtualClusterParser
      * @param type
      * @param address
      * @param port
+     * @param keymap 
      * @return
      */
-    String addGraphics(String xmlDescription, String type, String address, String port);
+    String addGraphics(String xmlDescription, String type, String address, String port, String keymap);
     
 }
 
