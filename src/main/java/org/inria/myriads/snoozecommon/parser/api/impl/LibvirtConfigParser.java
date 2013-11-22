@@ -226,7 +226,7 @@ public class LibvirtConfigParser implements VirtualClusterParser
     }
 
     @Override 
-    public String addCdRomImage(String xmlDesc, String path)
+    public String addCdRomImage(String xmlDesc, String path, String bus, String dev)
     {
         log_.debug("Adding cd rom to the template");
         try
@@ -237,8 +237,8 @@ public class LibvirtConfigParser implements VirtualClusterParser
             disk.setType("file")
                 .setDevice("cdrom")
                 .setSourceFile(path)
-                .setTargetBus("virtio")
-                .setTargetDev(generateTargetDev(disks.size()));
+                .setTargetBus(bus)
+                .setTargetDev(dev);
             disks.add(disk);
             String xml = marshal(domain);    
             return xml;
@@ -252,7 +252,7 @@ public class LibvirtConfigParser implements VirtualClusterParser
         return xmlDesc;
     }
     @Override
-    public String addDiskImage(String xmlDesc, VirtualMachineImage image) 
+    public String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev) 
     {
         try 
         {
@@ -284,8 +284,8 @@ public class LibvirtConfigParser implements VirtualClusterParser
                 throw new
                 JAXBException(String.format("the file format %s isn't implemented in the parser", image.getFormat()));
             }
-            disk.setTargetBus("virtio");
-            disk.setTargetDev(generateTargetDev(disks.size()));
+            disk.setTargetBus(bus);
+            disk.setTargetDev(dev);
             disks.add(disk);
             String xml = marshal(domain);
             return xml;
@@ -443,7 +443,7 @@ public class LibvirtConfigParser implements VirtualClusterParser
 
     
     @Override
-    public String addGraphics(String xmlDescription, String type, String address, String port)
+    public String addGraphics(String xmlDescription, String type, String address, String port, String keymap)
     {
         String newXmlDescription = xmlDescription;
         try 
@@ -452,7 +452,8 @@ public class LibvirtConfigParser implements VirtualClusterParser
             LibvirtConfigGraphics graphics = new LibvirtConfigGraphics();
             graphics.setType(type)
             .setListen(address)
-            .setPort(port);
+            .setPort(port)
+            .setKeymap(keymap);
             domain.addGraphics(graphics);
             
             newXmlDescription = marshal(domain);
