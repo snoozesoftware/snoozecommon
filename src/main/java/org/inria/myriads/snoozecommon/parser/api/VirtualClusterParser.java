@@ -22,11 +22,13 @@ package org.inria.myriads.snoozecommon.parser.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.inria.myriads.snoozecommon.communication.localcontroller.hypervisor.HypervisorDriver;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachineMetaData;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineTemplate;
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.exception.VirtualClusterParserException;
+import org.inria.myriads.snoozecommon.virtualmachineimage.VirtualMachineImage;
 
 
 /**
@@ -36,16 +38,7 @@ import org.inria.myriads.snoozecommon.exception.VirtualClusterParserException;
   */
 public interface VirtualClusterParser 
 {
-    /**
-     * Creates virtual machine meta data.
-     * 
-     * @param cluster                           The virtual cluster description
-     * @return                                  The virtual machine meta data map
-     * @throws VirtualClusterParserException 
-     */
-    ArrayList<VirtualMachineMetaData> createVirtualMachineMetaData(VirtualClusterSubmissionRequest cluster) 
-        throws VirtualClusterParserException;
-
+    
     /**
      * Get the network interfaces for the a xml description.
      * 
@@ -90,6 +83,118 @@ public interface VirtualClusterParser
      * @throws Exception 
      */
     VirtualMachineMetaData parseDescription(VirtualMachineTemplate virtualMachineDescription) throws Exception;
+    
+
+    /**
+     * 
+     * Adds a disk image to the template.
+     * 
+     * @param image     The image to add
+     * @param dev 
+     * @param bus 
+     * @return          The new template.
+     */
+    String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev);
+
+    
+    /**
+     * 
+     * Adds a serial.
+     * 
+     * @param xml           the xml Desc.
+     * @param type          type of serial.
+     * @param targetPort    target port.
+     * @return 
+     */
+    String addSerial(String xml, String type, String targetPort);
+
+
+    /**
+     * 
+     * Adds a console
+     * 
+     * @param xmlDescription    the xml description.
+     * @param type              the type
+     * @param targetPort        the target port
+     * @param targetType        the target type
+     * @return
+     */
+    String addConsole(
+            String xmlDescription, 
+            String type, 
+            String targetPort,
+            String targetType);
+
+
+    /**
+     * 
+     * sets the driver type.
+     * 
+     * @param xmlDescription    the xml description
+     * @param driver            the driver
+     * @return
+     */
+    String setDomainType(String xmlDescription, HypervisorDriver driver);
+
+
+    /**
+     * 
+     * sets the os type.
+     * 
+     * @param xmlDescription    the xml description
+     * @param driver            the driver type
+     * @return
+     */
+    String setOsType(String xmlDescription, HypervisorDriver driver);
+
+
+    /**
+     * 
+     * Add a cd rom image.
+     * 
+     * @param xmlDesc
+     * @param path
+     * @param dev 
+     * @param bus 
+     * @return
+     */
+    String addCdRomImage(String xmlDesc, String path, String bus, String dev);
+
+
+    /**
+     * 
+     * Gets the first disk image.
+     * 
+     * @return
+     */
+    VirtualMachineImage getFirstDiskImage(String xmlDescription);
+
+
+    
+    /**
+     * 
+     * Remove a disk matchin the name given in parameters.
+     * 
+     * 
+     * @param xmlRepresentation     The xml description
+     * @param name                  The name of the disk to remove.
+     * @return  the modified xml description.
+     */
+    String removeDisk(String xmlRepresentation, String name);
+
+
+    /**
+     * 
+     * Adds a graphics.
+     * 
+     * @param xmlDescription
+     * @param type
+     * @param address
+     * @param port
+     * @param keymap 
+     * @return
+     */
+    String addGraphics(String xmlDescription, String type, String address, String port, String keymap);
     
 }
 

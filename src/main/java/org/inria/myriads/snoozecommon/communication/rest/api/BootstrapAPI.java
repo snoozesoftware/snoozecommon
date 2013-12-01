@@ -29,6 +29,7 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.VirtualMachin
 import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.ClientMigrationRequestSimple;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualClusterSubmissionResponse;
+import org.inria.myriads.snoozecommon.communication.virtualmachine.VirtualMachinesList;
 import org.inria.myriads.snoozecommon.request.HostListRequest;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
@@ -175,7 +176,7 @@ public interface BootstrapAPI
      * @return virtual machine list.
      */
     @Post("?getVirtualMachineDescriptions")
-    List<VirtualMachineMetaData> getVirtualMachineDescriptions(HostListRequest hostListRequest);
+    VirtualMachinesList getVirtualMachineDescriptions(HostListRequest hostListRequest);
     
     
     /**

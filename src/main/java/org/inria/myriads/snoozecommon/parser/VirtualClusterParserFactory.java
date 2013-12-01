@@ -19,8 +19,12 @@
  */
 package org.inria.myriads.snoozecommon.parser;
 
+import javax.xml.bind.JAXBException;
+
+import org.inria.myriads.snoozecommon.communication.NetworkAddress;
 import org.inria.myriads.snoozecommon.parser.api.VirtualClusterParser;
 import org.inria.myriads.snoozecommon.parser.api.impl.LibVirtXMLParser;
+import org.inria.myriads.snoozecommon.parser.api.impl.LibvirtConfigParser;
 
 
 
@@ -43,8 +47,9 @@ public final class VirtualClusterParserFactory
      * @return              The virtual cluster parser
      * @throws Exception
      */
-    public static VirtualClusterParser newVirtualClusterParser() 
+    public static VirtualClusterParser newVirtualClusterParser()
     {
-        return new LibVirtXMLParser();
+        //return new LibVirtXMLParser();
+        return new LibvirtConfigParser();
     }
 }

@@ -41,6 +41,18 @@ public final class VirtualMachineTemplate
     /** Libvirt description. */
     private String libVirtDescription_;
     
+    /** Vcpu request.*/
+    private int vcpus_;
+    
+    /** memory request.*/
+    private long memory_;
+    
+    /** image id.*/
+    private String imageId_;
+    
+    /** virtual machine name.*/
+    private String name_;
+    
     /** Node{group manager id or local controller id} Id (force placement). */
     private String hostId_;
     
@@ -49,6 +61,8 @@ public final class VirtualMachineTemplate
     {
         networkCapacityDemand_ = new NetworkDemand();
         hostId_ = Globals.DEFAULT_INITIALIZATION;
+        vcpus_ = Globals.DEFAULT_VCPU_INITIALIZATION;
+        memory_ = Globals.DEFAULT_MEMORY_INITIALIZATION;
     }
     
     /**
@@ -105,5 +119,85 @@ public final class VirtualMachineTemplate
     public void setHostId(String hostId) 
     {
         hostId_ = hostId;
+    }
+
+    /**
+     * @return the vcpus
+     */
+    public int getVcpus() 
+    {
+        return vcpus_;
+    }
+
+    /**
+     * @param vcpus the vcpus to set
+     */
+    public void setVcpus(int vcpus) 
+    {
+        vcpus_ = vcpus;
+    }
+
+    /**
+     * @return the memory
+     */
+    public long getMemory() 
+    {
+        return memory_;
+    }
+
+    /**
+     * @param memory the memory to set
+     */
+    public void setMemory(long memory) 
+    {
+        memory_ = memory;
+    }
+
+    /**
+     * @return the imageId
+     */
+    public String getImageId() 
+    {
+        return imageId_;
+    }
+
+    /**
+     * @param imageId the imageId to set
+     */
+    public void setImageId(String imageId) 
+    {
+        imageId_ = imageId;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() 
+    {
+        return name_;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) 
+    {
+        name_ = name;
+    }
+
+    /**
+     * @return the libVirtDescription
+     */
+    public String getLibVirtDescription() 
+    {
+        return libVirtDescription_;
+    }
+
+    /**
+     * @param libVirtDescription the libVirtDescription to set
+     */
+    public void setLibVirtDescription(String libVirtDescription) 
+    {
+        libVirtDescription_ = libVirtDescription;
     }
 }
