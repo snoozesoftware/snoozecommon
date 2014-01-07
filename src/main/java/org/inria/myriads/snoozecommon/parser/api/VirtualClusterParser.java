@@ -94,7 +94,7 @@ public interface VirtualClusterParser
      * @param bus 
      * @return          The new template.
      */
-    String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev);
+    String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev, String cache);
 
     
     /**
