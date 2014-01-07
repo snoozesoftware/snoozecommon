@@ -252,7 +252,7 @@ public class LibvirtConfigParser implements VirtualClusterParser
         return xmlDesc;
     }
     @Override
-    public String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev) 
+    public String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev, String cache) 
     {
         try 
         {
@@ -284,8 +284,10 @@ public class LibvirtConfigParser implements VirtualClusterParser
                 throw new
                 JAXBException(String.format("the file format %s isn't implemented in the parser", image.getFormat()));
             }
-            disk.setTargetBus(bus);
-            disk.setTargetDev(dev);
+            disk.setTargetBus(bus)
+                .setTargetDev(dev)
+                .setDriverCache(cache);
+            
             disks.add(disk);
             String xml = marshal(domain);
             return xml;

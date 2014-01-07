@@ -363,7 +363,7 @@ public final class LibVirtXMLParser
 
 
     @Override
-    public String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev) 
+    public String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev, String cache) 
     {
         log_.debug("Adding a disk is not implemented for this parser");
         return null;
