@@ -192,9 +192,19 @@ public interface VirtualClusterParser
      * @param address
      * @param port
      * @param keymap 
-     * @return
+     * @return xml description
      */
     String addGraphics(String xmlDescription, String type, String address, String port, String keymap);
+    
+
+    /**
+     * 
+     * Sets all the power features.
+     * 
+     * @param string xmlDescription
+     * @return  xlm description
+     */
+    String setFeatures(String xmlDescription);
     
 }
 
