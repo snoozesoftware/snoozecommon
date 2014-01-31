@@ -31,7 +31,9 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.Vi
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
 import org.inria.myriads.snoozecommon.guard.Guard;
+import org.inria.myriads.snoozecommon.virtualmachineimage.VirtualMachineImage;
 import org.restlet.resource.ClientResource;
+import org.restlet.resource.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -585,6 +587,33 @@ public final class RESTLocalControllerCommunicator
         }
         
         return null;
+    }
+
+    @Post("?prepareMigration")
+    public boolean prepareMigration(VirtualMachineImage virtualMachineImage)
+    {
+        log_.debug("Preparing virtual machine migration");
+        
+        ClientResource clientResource = null;
+        boolean isPrepared = false;
+        try
+        {
+            clientResource = createClientResource();
+            LocalControllerAPI localControllerResource = clientResource.wrap(LocalControllerAPI.class); 
+            return localControllerResource.prepareMigration(virtualMachineImage);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error during virtual machine monitoring start", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }        
+        return isPrepared;
     }
 
 

@@ -363,7 +363,7 @@ public final class LibVirtXMLParser
 
 
     @Override
-    public String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev) 
+    public String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev, String cache) 
     {
         log_.debug("Adding a disk is not implemented for this parser");
         return null;
@@ -413,15 +413,22 @@ public final class LibVirtXMLParser
     }
 
     @Override
-    public String removeDisk(String xmlRepresentation, String name) {
+    public String removeDisk(String xmlDescription, String name) {
         log_.debug("Removing the disk image isn't implemented for this parser.");
-        return null;
+        return xmlDescription;
     }
 
     @Override
     public String addGraphics(String xmlDescription, String type, String address, String port, String keymap)
     {
         log_.debug("Adding graphics isn't implemented for this parser.");
-        return null;
+        return xmlDescription;
+    }
+
+    @Override
+    public String setFeatures(String xmlDescription)
+    {
+        log_.debug("Setting features isn't implemented for this parser.");
+        return xmlDescription;
     }
 }
