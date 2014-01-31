@@ -26,6 +26,7 @@ import org.inria.myriads.snoozecommon.communication.virtualcluster.migration.Mig
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionRequest;
 import org.inria.myriads.snoozecommon.communication.virtualcluster.submission.VirtualMachineSubmissionResponse;
 import org.inria.myriads.snoozecommon.communication.virtualmachine.ResizeRequest;
+import org.inria.myriads.snoozecommon.virtualmachineimage.VirtualMachineImage;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 
@@ -170,6 +171,9 @@ public interface LocalControllerAPI
      * @return  List of Virtual Machine Meta Data
      */
     @Post("?getVirtualMachines")
-    List<VirtualMachineMetaData> getVirtualMachines(int numberOfMonitoringEntries); 
+    List<VirtualMachineMetaData> getVirtualMachines(int numberOfMonitoringEntries);
+
+    @Post("?prepareMigration")
+    boolean prepareMigration(VirtualMachineImage virtualMachineImage); 
 
 }

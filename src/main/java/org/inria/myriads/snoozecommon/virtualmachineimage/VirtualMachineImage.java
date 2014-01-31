@@ -24,6 +24,9 @@ public class VirtualMachineImage
     /** The allocation (virtual in bytes) size.*/
     private long allocation_;
     
+    /** The backing store (optionnal).*/
+    private String backingStore_;
+    
     /**
      * @param name_
      */
@@ -115,7 +118,27 @@ public class VirtualMachineImage
     {
         allocation_ = allocation;
     }
+
+    /**
+     * 
+     * Sets the backing store.
+     * 
+     * @param sourcePath        The path to the backing store.
+     */
+    public void setBackingStore(String sourcePath)
+    {
+        backingStore_ = sourcePath;
+    }
     
-    
+    /**
+     * 
+     * Sets the backing store.
+     * 
+     * @param sourcePath        The path to the backing store.
+     */
+    public String getBackingStore()
+    {
+        return backingStore_;
+    }
     
 }

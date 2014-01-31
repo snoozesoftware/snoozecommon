@@ -17,6 +17,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.inria.myriads.libvirt.domain.LibvirtConfigDisk;
 import org.inria.myriads.libvirt.domain.LibvirtConfigDomain;
+import org.inria.myriads.libvirt.domain.LibvirtConfigFeatures;
 import org.inria.myriads.libvirt.domain.LibvirtConfigGraphics;
 import org.inria.myriads.libvirt.domain.LibvirtConfigInterface;
 import org.inria.myriads.libvirt.domain.LibvirtConfigSerialConsole;
@@ -252,7 +253,7 @@ public class LibvirtConfigParser implements VirtualClusterParser
         return xmlDesc;
     }
     @Override
-    public String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev) 
+    public String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev, String cache) 
     {
         try 
         {
@@ -284,8 +285,10 @@ public class LibvirtConfigParser implements VirtualClusterParser
                 throw new
                 JAXBException(String.format("the file format %s isn't implemented in the parser", image.getFormat()));
             }
-            disk.setTargetBus(bus);
-            disk.setTargetDev(dev);
+            disk.setTargetBus(bus)
+                .setTargetDev(dev)
+                .setDriverCache(cache);
+            
             disks.add(disk);
             String xml = marshal(domain);
             return xml;
@@ -462,6 +465,29 @@ public class LibvirtConfigParser implements VirtualClusterParser
         {
             log_.error("Unable to add graphics");
             e.printStackTrace();
+        }
+        return newXmlDescription;
+    }
+
+    @Override
+    public String setFeatures(String xmlDescription)
+    {
+        String newXmlDescription = xmlDescription;
+        try{
+            LibvirtConfigDomain domain = unmarshal(xmlDescription);
+            
+            LibvirtConfigFeatures features = new LibvirtConfigFeatures();
+            features.enableAcpi();
+            features.enableApic();
+            features.enablePae();
+            domain.setFeatures(features);
+            
+            newXmlDescription = marshal(domain);
+        }
+        catch(JAXBException e)
+        {
+            log_.error("Unable to set the features");
+            log_.error(e.getMessage());
         }
         return newXmlDescription;
     }
