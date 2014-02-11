@@ -76,6 +76,15 @@ public final class LocalControllerDescription
     /** Total capacity of the local controller. */
     private ArrayList<Double> totalCapacity_;
     
+    /** Monitoring thresholds*/
+    private MonitoringThresholds thresholds_;
+    
+    /** Host Resources to monitor. */
+    private HashMap<String, Resource> hostResources_;
+    
+    /** Virtual resources offer by the host.*/
+    private HashMap<String, Resource> virtualResources_;
+    
     /**
      * Constructor.
      */
@@ -92,6 +101,8 @@ public final class LocalControllerDescription
         status_ = LocalControllerStatus.UNKNOWN;
         isAssigned_ = false;
         location_ = new LocalControllerLocation();
+        hostResources_ = new HashMap<String, Resource>();
+        virtualResources_ = new HashMap<String, Resource>();
     }
     
    
@@ -126,6 +137,7 @@ public final class LocalControllerDescription
         hostname_ = original.getHostname();
         isAssigned_ = original.getIsAssigned();
         location_ = new LocalControllerLocation(original.getLocation());
+        hostResources_ = new HashMap<String, Resource>(original.getHostResources());
     }
     
     /**
@@ -400,5 +412,65 @@ public final class LocalControllerDescription
     public void setLocation(LocalControllerLocation location) 
     {
         location_ = location;
+    }
+
+
+
+    /**
+     * @return the hostResources
+     */
+    public HashMap<String, Resource> getHostResources()
+    {
+        return hostResources_;
+    }
+
+
+
+    /**
+     * @param hostResources the hostResources to set
+     */
+    public void setHostResources(HashMap<String, Resource> hostResources)
+    {
+        hostResources_ = hostResources;
+    }
+
+
+
+    /**
+     * @return the virtualResources
+     */
+    public HashMap<String, Resource> getVirtualResources()
+    {
+        return virtualResources_;
+    }
+
+
+
+    /**
+     * @param virtualResources the virtualResources to set
+     */
+    public void setVirtualResources(HashMap<String, Resource> virtualResources)
+    {
+        virtualResources_ = virtualResources;
+    }
+
+
+
+    /**
+     * @return the thresholds
+     */
+    public MonitoringThresholds getThresholds()
+    {
+        return thresholds_;
+    }
+
+
+
+    /**
+     * @param thresholds the thresholds to set
+     */
+    public void setThresholds(MonitoringThresholds thresholds)
+    {
+        thresholds_ = thresholds;
     }
 }
