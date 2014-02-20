@@ -279,6 +279,25 @@ public final class MathUtils
     }
     
     /**
+     * Creates virtual machine utilization vector.
+     * 
+     * @param cpu           The cpu utilization
+     * @param memory        The memory usage
+     * @param networkDemand The network demand
+     * @return              The vector of values
+     */
+    public static ArrayList<Double> createCustomVector(double cpu, double memory, double rx, double tx)
+    {
+        Guard.check(cpu, memory, rx, tx);
+        ArrayList<Double> utilizationVector = new ArrayList<Double>();
+        utilizationVector.add(cpu);
+        utilizationVector.add(memory);
+        utilizationVector.add(rx);
+        utilizationVector.add(tx);
+        return utilizationVector; 
+    }
+    
+    /**
      * Creates and empty vector.
      * s
      * @return                  The vector of values

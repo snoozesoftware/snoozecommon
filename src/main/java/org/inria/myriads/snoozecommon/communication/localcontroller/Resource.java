@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 
 import org.inria.myriads.snoozecommon.datastructure.LRUCache;
 
+import com.google.common.collect.Lists;
+
 /**
  * @author msimonin
  *
@@ -54,6 +56,33 @@ public class Resource implements Serializable
         history_ = new LRUCache<Long, Double>();
     }
 
+    
+    /**
+     * Copy constructor.
+     * 
+     */
+    public Resource(Resource resource, int numberOfMonitoringEntries)
+    {
+        LRUCache<Long, Double> history = resource.getHistory();
+        total_ = resource.getTotal();
+        name_  = resource.getName();
+        thresholds_ = resource.getThresholds();
+        historySize_ = resource.getHistorySize();
+        history_ = new LRUCache<Long, Double>(historySize_);
+        List<Long> reversedTimestamps = Lists.reverse(Lists.newArrayList(history.keySet()));
+        int i = 0;
+        for (Long timestamp : reversedTimestamps)
+        {
+            if (i >= numberOfMonitoringEntries)
+            {
+                break;
+            }
+            history_.put(timestamp, history.get(timestamp));
+            i++;
+        }
+        
+    }
+    
     /**
      * Copy constructor.
      * 
