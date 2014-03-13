@@ -80,10 +80,9 @@ public final class LocalControllerDescription
     private MonitoringThresholds thresholds_;
     
     /** Host Resources to monitor. */
-    private HashMap<String, Resource> hostResources_;
+    //private HashMap<String, Resource> hostResources_;
+    private HostResources hostResources_;
     
-    /** Virtual resources offer by the host.*/
-    private HashMap<String, Resource> virtualResources_;
     
     /**
      * Constructor.
@@ -101,8 +100,7 @@ public final class LocalControllerDescription
         status_ = LocalControllerStatus.UNKNOWN;
         isAssigned_ = false;
         location_ = new LocalControllerLocation();
-        hostResources_ = new HashMap<String, Resource>();
-        virtualResources_ = new HashMap<String, Resource>();
+        hostResources_ = new HostResources();
     }
     
    
@@ -137,7 +135,8 @@ public final class LocalControllerDescription
         hostname_ = original.getHostname();
         isAssigned_ = original.getIsAssigned();
         location_ = new LocalControllerLocation(original.getLocation());
-        hostResources_ = new HashMap<String, Resource>(original.getHostResources());
+        //hostResources_ = new HashMap<String, Resource>(original.getHostResources());
+        hostResources_ = new HostResources(original.getHostResources());
     }
     
     /**
@@ -419,7 +418,7 @@ public final class LocalControllerDescription
     /**
      * @return the hostResources
      */
-    public HashMap<String, Resource> getHostResources()
+    public HostResources getHostResources()
     {
         return hostResources_;
     }
@@ -429,31 +428,10 @@ public final class LocalControllerDescription
     /**
      * @param hostResources the hostResources to set
      */
-    public void setHostResources(HashMap<String, Resource> hostResources)
+    public void setHostResources(HostResources hostResources)
     {
         hostResources_ = hostResources;
     }
-
-
-
-    /**
-     * @return the virtualResources
-     */
-    public HashMap<String, Resource> getVirtualResources()
-    {
-        return virtualResources_;
-    }
-
-
-
-    /**
-     * @param virtualResources the virtualResources to set
-     */
-    public void setVirtualResources(HashMap<String, Resource> virtualResources)
-    {
-        virtualResources_ = virtualResources;
-    }
-
 
 
     /**
