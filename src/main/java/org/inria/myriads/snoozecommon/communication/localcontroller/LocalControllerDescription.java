@@ -76,6 +76,14 @@ public final class LocalControllerDescription
     /** Total capacity of the local controller. */
     private ArrayList<Double> totalCapacity_;
     
+    /** Monitoring thresholds*/
+    private MonitoringThresholds thresholds_;
+    
+    /** Host Resources to monitor. */
+    //private HashMap<String, Resource> hostResources_;
+    private HostResources hostResources_;
+    
+    
     /**
      * Constructor.
      */
@@ -92,6 +100,7 @@ public final class LocalControllerDescription
         status_ = LocalControllerStatus.UNKNOWN;
         isAssigned_ = false;
         location_ = new LocalControllerLocation();
+        hostResources_ = new HostResources();
     }
     
    
@@ -126,6 +135,8 @@ public final class LocalControllerDescription
         hostname_ = original.getHostname();
         isAssigned_ = original.getIsAssigned();
         location_ = new LocalControllerLocation(original.getLocation());
+        //hostResources_ = new HashMap<String, Resource>(original.getHostResources());
+        hostResources_ = new HostResources(original.getHostResources());
     }
     
     /**
@@ -400,5 +411,44 @@ public final class LocalControllerDescription
     public void setLocation(LocalControllerLocation location) 
     {
         location_ = location;
+    }
+
+
+
+    /**
+     * @return the hostResources
+     */
+    public HostResources getHostResources()
+    {
+        return hostResources_;
+    }
+
+
+
+    /**
+     * @param hostResources the hostResources to set
+     */
+    public void setHostResources(HostResources hostResources)
+    {
+        hostResources_ = hostResources;
+    }
+
+
+    /**
+     * @return the thresholds
+     */
+    public MonitoringThresholds getThresholds()
+    {
+        return thresholds_;
+    }
+
+
+
+    /**
+     * @param thresholds the thresholds to set
+     */
+    public void setThresholds(MonitoringThresholds thresholds)
+    {
+        thresholds_ = thresholds;
     }
 }

@@ -43,6 +43,10 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Eugen Feller
  */
+/**
+ * @author msimonin
+ *
+ */
 public class VirtualMachineMetaData
     implements Serializable
 {
@@ -77,7 +81,8 @@ public class VirtualMachineMetaData
     
     /** Virtual monitoring history data. */
     private LRUCache<Long, VirtualMachineMonitoringData> usedCapacity_;
-        
+    
+    
     /** Requested capacity. */
     private ArrayList<Double> requestedCapacity_;
          
@@ -114,10 +119,30 @@ public class VirtualMachineMetaData
         requestedCapacity_ = new ArrayList<Double>(metaData.getRequestedCapacity());
         xmlRepresentation_ = metaData.getXmlRepresentation();
         isAssigned_ = metaData.getIsAssigned();
+        image_ = metaData.getImage();
     }
 
     /**
-     * Returns the algorithm monitoring data.
+     * Copy constructor.
+     * 
+     * @param metaData                        The original meta data
+     * @param numberOfMonitoringEntries       The number of monitoring entries
+     */ 
+    public VirtualMachineMetaData(VirtualMachineMetaData metaData, long pastTimestamp) 
+    {
+        Guard.check(metaData, pastTimestamp);
+        ipAddress_ = metaData.getIpAddress();
+        location_ = new VirtualMachineLocation(metaData.getVirtualMachineLocation());
+        status_ = metaData.getStatus();
+        errorCode_ = metaData.getErrorCode();
+        usedCapacity_ = metaData.getMonitoringData(pastTimestamp);
+        requestedCapacity_ = new ArrayList<Double>(metaData.getRequestedCapacity());
+        xmlRepresentation_ = metaData.getXmlRepresentation();
+        isAssigned_ = metaData.getIsAssigned();
+    }
+    
+    /**
+     * Returns the monitoring data.
      * 
      * @param numberOfMonitoringEntries   The maximum number of monitoring entries
      * @return                            The virtual machine monitoring data
@@ -148,6 +173,36 @@ public class VirtualMachineMetaData
         return result;
     }
     
+    /**
+     * Returns the monitoring data.
+     * 
+     * @param numberOfMonitoringEntries   The maximum number of monitoring entries
+     * @return                            The virtual machine monitoring data
+     */
+    private LRUCache<Long, VirtualMachineMonitoringData> getMonitoringData(long pastTimestamp)
+    {
+        Guard.check(pastTimestamp);
+                
+        LRUCache<Long, VirtualMachineMonitoringData> result = 
+            new LRUCache<Long, VirtualMachineMonitoringData>();   
+        
+        // Indeed we want the  most recent values -> Reverse the list
+        List<VirtualMachineMonitoringData> reverseList = Lists.reverse(Lists.newArrayList(usedCapacity_.values()));
+        for (VirtualMachineMonitoringData monitoringData : reverseList)
+        {
+            VirtualMachineMonitoringData copiedEntity = new VirtualMachineMonitoringData(monitoringData);
+            
+            if (copiedEntity.getTimeStamp() >= pastTimestamp)
+            {
+                log_.debug(String.format("Copied virtual machine monitoring data. Time: %s, Used capacity: %s", 
+                                         copiedEntity.getTimeStamp(),
+                                         copiedEntity.getUsedCapacity())); 
+                result.put(copiedEntity.getTimeStamp(), copiedEntity);
+            }
+        }
+        
+        return result;
+    }
     /**
      * Sets the requested requirements.
      * 
@@ -199,7 +254,8 @@ public class VirtualMachineMetaData
     {
         usedCapacity_ = usedCapacity;
     }
-
+    
+    
     /**
      * Returns the used capacity.
      * 
