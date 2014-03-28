@@ -114,6 +114,7 @@ public class VirtualMachineMetaData
         requestedCapacity_ = new ArrayList<Double>(metaData.getRequestedCapacity());
         xmlRepresentation_ = metaData.getXmlRepresentation();
         isAssigned_ = metaData.getIsAssigned();
+        image_ = metaData.getImage();
     }
 
     /**
