@@ -205,6 +205,16 @@ public interface VirtualClusterParser
      * @return  xlm description
      */
     String setFeatures(String xmlDescription);
+
+
+    /**
+     * 
+     * Add a simple serial console.
+     * 
+     * @param xmlDescription
+     * @return
+     */
+    String addSerial(String xmlDescription);
     
 }
 
