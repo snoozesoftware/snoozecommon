@@ -5,3 +5,4 @@
 Bug fixes
 
   - #81 handle destroy image with backingImageManager and src=dest path.
+  - #87 add test hypervisor type.
