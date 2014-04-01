@@ -367,8 +367,11 @@ public class LibvirtConfigParser implements VirtualClusterParser
             case xen :
                 domain.setType("xen");
                 break;
+            case test :
+                domain.setType("test");
+                break;
             default:
-                domain.setType("kvm");
+                domain.setType("test");
                 break;
             }
             
