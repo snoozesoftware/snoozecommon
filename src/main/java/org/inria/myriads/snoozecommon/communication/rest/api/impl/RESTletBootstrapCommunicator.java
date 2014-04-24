@@ -224,8 +224,26 @@ public final class RESTletBootstrapCommunicator
     @Override
     public boolean migrateVirtualMachine(ClientMigrationRequestSimple migrationRequest) 
     {
-        log_.error("Not implemented yet");
-        return false;
+        ClientResource clientResource = null;
+        boolean isMigrating = false;
+        try
+        {
+            clientResource = createClientResource();
+            BootstrapAPI bootstrapResource = clientResource.wrap(BootstrapAPI.class); 
+            isMigrating = bootstrapResource.migrateVirtualMachine(migrationRequest);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting bootstrap", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return isMigrating;    
     }
 
     @Override
