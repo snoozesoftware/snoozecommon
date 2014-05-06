@@ -35,8 +35,9 @@ public class Resource implements Serializable
 
     /**
      * 
-     * Constructor.
+     *  Constructor.
      * 
+     * @param historySize       The historySize.
      */
     public Resource(int historySize)
     {
@@ -58,8 +59,11 @@ public class Resource implements Serializable
 
     
     /**
+     * 
      * Copy constructor.
      * 
+     * @param resource                      The resource to copy.
+     * @param numberOfMonitoringEntries     The number of monitoring entry to copy.
      */
     public Resource(Resource resource, int numberOfMonitoringEntries)
     {
@@ -83,9 +87,13 @@ public class Resource implements Serializable
         
     }
     
+
     /**
+     * 
      * Copy constructor.
      * 
+     * @param resource          The resource to copy.
+     * @param pastTimestamp     Copy since this timestamp.
      */
     public Resource(Resource resource, long pastTimestamp)
     {

@@ -283,7 +283,8 @@ public final class MathUtils
      * 
      * @param cpu           The cpu utilization
      * @param memory        The memory usage
-     * @param networkDemand The network demand
+     * @param rx            The network tx demand
+     * @param tx            The network rx demand
      * @return              The vector of values
      */
     public static ArrayList<Double> createCustomVector(double cpu, double memory, double rx, double tx)

@@ -54,7 +54,6 @@ public class LibvirtConfigParser implements VirtualClusterParser
 
     /**
      * Constructor. 
-     * @throws JAXBException 
      */
     public LibvirtConfigParser() 
     {

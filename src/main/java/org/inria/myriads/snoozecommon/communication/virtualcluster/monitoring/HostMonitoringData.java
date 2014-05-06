@@ -21,7 +21,6 @@ package org.inria.myriads.snoozecommon.communication.virtualcluster.monitoring;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.inria.myriads.snoozecommon.guard.Guard;
@@ -42,7 +41,7 @@ public final class HostMonitoringData
     
     /** 
      * Used capacity. 
-     * metric -> value
+     * metric, value
      *  
      */
     private HashMap<String, Double> usedCapacity_;

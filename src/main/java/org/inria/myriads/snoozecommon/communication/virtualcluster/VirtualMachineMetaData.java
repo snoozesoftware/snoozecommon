@@ -126,7 +126,7 @@ public class VirtualMachineMetaData
      * Copy constructor.
      * 
      * @param metaData                        The original meta data
-     * @param numberOfMonitoringEntries       The number of monitoring entries
+     * @param pastTimestamp                   The number of monitoring entries
      */ 
     public VirtualMachineMetaData(VirtualMachineMetaData metaData, long pastTimestamp) 
     {
