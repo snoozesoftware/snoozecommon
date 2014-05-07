@@ -431,4 +431,11 @@ public final class LibVirtXMLParser
         log_.debug("Setting features isn't implemented for this parser.");
         return xmlDescription;
     }
+
+    @Override
+    public String addSerial(String xmlDescription)
+    {
+        log_.debug("adding a serial isn't implemented for this parser.");
+        return xmlDescription;
+    }
 }

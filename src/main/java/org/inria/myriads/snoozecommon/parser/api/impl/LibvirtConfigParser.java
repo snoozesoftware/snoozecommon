@@ -326,6 +326,25 @@ public class LibvirtConfigParser implements VirtualClusterParser
         }
         return newXmlDescription;            
     }
+    
+    @Override
+    public String addSerial(String xmlDescription)
+    {
+        String newXmlDescription = xmlDescription;
+        try {
+            LibvirtConfigDomain domain = unmarshal(xmlDescription);
+            LibvirtConfigSerialConsole serial = new LibvirtConfigSerialConsole();
+            domain.addConsole(serial);
+            newXmlDescription = marshal(domain);
+        }
+        catch (JAXBException e) 
+        {   
+            log_.error("Unable to add a console");
+            e.printStackTrace();
+        }
+        return newXmlDescription;
+    }
+
 
     @Override
     public String addConsole(
@@ -367,8 +386,11 @@ public class LibvirtConfigParser implements VirtualClusterParser
             case xen :
                 domain.setType("xen");
                 break;
+            case test :
+                domain.setType("test");
+                break;
             default:
-                domain.setType("kvm");
+                domain.setType("test");
                 break;
             }
             
@@ -491,7 +513,5 @@ public class LibvirtConfigParser implements VirtualClusterParser
         }
         return newXmlDescription;
     }
-
- 
-
+    
 }
