@@ -30,7 +30,7 @@ public class HostResources implements Serializable
      * 
      * Copy constructor.
      * 
-     * @param hostResources
+     * @param hostResources host resource to copy.
      */
     public HostResources(HostResources hostResources)
     {

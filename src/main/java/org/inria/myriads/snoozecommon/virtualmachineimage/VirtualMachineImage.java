@@ -28,7 +28,7 @@ public class VirtualMachineImage
     private String backingStore_;
     
     /**
-     * @param name_
+     * Constructor.
      */
     public VirtualMachineImage() 
     {
@@ -131,10 +131,8 @@ public class VirtualMachineImage
     }
     
     /**
-     * 
-     * Sets the backing store.
-     * 
-     * @param sourcePath        The path to the backing store.
+     * Gets the backing store.
+     * @return the backingStore.
      */
     public String getBackingStore()
     {

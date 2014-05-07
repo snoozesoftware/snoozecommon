@@ -75,7 +75,7 @@ public final class LibVirtXMLParser
      * 
      * @param cluster                        The virual cluster description
      * @return                               The virtual machine meta data map
-     * @throws VirtualClusterParserException 
+     * @throws VirtualClusterParserException exception
      */
     public ArrayList<VirtualMachineMetaData> createVirtualMachineMetaData(VirtualClusterSubmissionRequest cluster) 
         throws VirtualClusterParserException 
@@ -108,7 +108,7 @@ public final class LibVirtXMLParser
      * 
      * @param virtualMachineDescription     The virtual machine description
      * @return                              The virtual machine meta data
-     * @throws Exception 
+     * @throws Exception exception 
      */
     public VirtualMachineMetaData parseDescription(VirtualMachineTemplate virtualMachineDescription) 
         throws Exception 

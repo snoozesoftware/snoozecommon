@@ -27,9 +27,9 @@ public class LocalControllerLocation implements Serializable
     private NetworkAddress groupManagerControlDataAddress_;
 
     /**
-     * @param localControllerId
-     * @param groupManagerId
-     * @param groupManagerControlDataAddress
+     * 
+     * Constructor.
+     * 
      */
     public LocalControllerLocation() 
     {
