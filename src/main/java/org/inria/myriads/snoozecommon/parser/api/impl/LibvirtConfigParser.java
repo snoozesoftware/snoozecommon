@@ -381,6 +381,9 @@ public class LibvirtConfigParser implements VirtualClusterParser
             switch(driver)
             {
             case qemu :
+                domain.setType("qemu");
+                break;
+            case kvm :
                 domain.setType("kvm");
                 break;
             case xen :

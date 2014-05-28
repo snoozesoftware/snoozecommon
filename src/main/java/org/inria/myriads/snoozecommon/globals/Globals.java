@@ -52,6 +52,9 @@ public final class Globals
     
     /** Default memory initialization (submission request)*/
     public static final long DEFAULT_MEMORY_INITIALIZATION = 1024*128;
+
+    /** Default disk format. */
+    public static final String DEFAULT_DISK_FORMAT = "raw";
     
     /** Hide constructor. */
     private Globals()
