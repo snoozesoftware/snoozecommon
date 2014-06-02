@@ -121,7 +121,7 @@ public final class VirtualClusterParserUtils
      *
      * @param xmlDescription    The xml description
      * @return                  The list of network interfaces
-     * @throws VirtualMachineTemplateException 
+     * @throws VirtualMachineTemplateException exception 
      */
     public static List<String> getNetworkInterfacesFromXml(String xmlDescription) 
             throws VirtualMachineTemplateException
