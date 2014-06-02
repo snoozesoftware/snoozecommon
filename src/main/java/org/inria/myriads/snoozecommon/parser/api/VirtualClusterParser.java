@@ -42,7 +42,7 @@ public interface VirtualClusterParser
     /**
      * Get the network interfaces for the a xml description.
      * 
-     * @param                                   xmlDescription    
+     * @param xmlDescription                    the xml description    
      * @return                                  List of network interfaces
      * @throws VirtualClusterParserException    Exception
      */
@@ -80,7 +80,7 @@ public interface VirtualClusterParser
      * 
      * @param virtualMachineDescription     The virtual machine description
      * @return                              The virtual machine meta data
-     * @throws Exception 
+     * @throws Exception                    Exception 
      */
     VirtualMachineMetaData parseDescription(VirtualMachineTemplate virtualMachineDescription) throws Exception;
     
@@ -89,9 +89,11 @@ public interface VirtualClusterParser
      * 
      * Adds a disk image to the template.
      * 
+     * @param xmlDesc   The xml description
      * @param image     The image to add
-     * @param dev 
-     * @param bus 
+     * @param dev       dev settings
+     * @param bus       bus settings
+     * @param cache     cache settings 
      * @return          The new template.
      */
     String addDiskImage(String xmlDesc, VirtualMachineImage image, String bus, String dev, String cache);
@@ -104,7 +106,7 @@ public interface VirtualClusterParser
      * @param xml           the xml Desc.
      * @param type          type of serial.
      * @param targetPort    target port.
-     * @return 
+     * @return the xml description
      */
     String addSerial(String xml, String type, String targetPort);
 
@@ -117,7 +119,7 @@ public interface VirtualClusterParser
      * @param type              the type
      * @param targetPort        the target port
      * @param targetType        the target type
-     * @return
+     * @return the xml description
      */
     String addConsole(
             String xmlDescription, 
@@ -132,7 +134,7 @@ public interface VirtualClusterParser
      * 
      * @param xmlDescription    the xml description
      * @param driver            the driver
-     * @return
+     * @return the xml description
      */
     String setDomainType(String xmlDescription, HypervisorDriver driver);
 
@@ -143,7 +145,7 @@ public interface VirtualClusterParser
      * 
      * @param xmlDescription    the xml description
      * @param driver            the driver type
-     * @return
+     * @return the xml description
      */
     String setOsType(String xmlDescription, HypervisorDriver driver);
 
@@ -152,11 +154,11 @@ public interface VirtualClusterParser
      * 
      * Add a cd rom image.
      * 
-     * @param xmlDesc
-     * @param path
-     * @param dev 
-     * @param bus 
-     * @return
+     * @param xmlDesc      xmlDescription
+     * @param path         the path
+     * @param dev          dev to be attached on
+     * @param bus          the bus to use
+     * @return the cd rom.
      */
     String addCdRomImage(String xmlDesc, String path, String bus, String dev);
 
@@ -164,8 +166,9 @@ public interface VirtualClusterParser
     /**
      * 
      * Gets the first disk image.
-     * 
-     * @return
+     *
+     * @param xmlDescription the xml description
+     * @return the disk
      */
     VirtualMachineImage getFirstDiskImage(String xmlDescription);
 
@@ -187,12 +190,12 @@ public interface VirtualClusterParser
      * 
      * Adds a graphics.
      * 
-     * @param xmlDescription
-     * @param type
-     * @param address
-     * @param port
-     * @param keymap 
-     * @return xml description
+     * @param xmlDescription    xmlDescription
+     * @param type              type
+     * @param address           address
+     * @param port              port   
+     * @param keymap            keymap
+     * @return xml description  description
      */
     String addGraphics(String xmlDescription, String type, String address, String port, String keymap);
     
@@ -201,8 +204,8 @@ public interface VirtualClusterParser
      * 
      * Sets all the power features.
      * 
-     * @param string xmlDescription
-     * @return  xlm description
+     * @param xmlDescription xmlDescription
+     * @return  xml description
      */
     String setFeatures(String xmlDescription);
 
@@ -211,8 +214,8 @@ public interface VirtualClusterParser
      * 
      * Add a simple serial console.
      * 
-     * @param xmlDescription
-     * @return
+     * @param xmlDescription    the xml description
+     * @return xml description
      */
     String addSerial(String xmlDescription);
     

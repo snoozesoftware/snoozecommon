@@ -41,8 +41,6 @@ public class ClientMigrationRequest
      * 
      * Empty Constructor.
      * 
-     * @param oldLocation
-     * @param newLocation
      */
     public ClientMigrationRequest() 
     {

@@ -53,8 +53,7 @@ public class LibvirtConfigParser implements VirtualClusterParser
     private JAXBContext context_ ;
 
     /**
-     * Constructor. 
-     * @throws JAXBException 
+     * Constructor.      
      */
     public LibvirtConfigParser() 
     {

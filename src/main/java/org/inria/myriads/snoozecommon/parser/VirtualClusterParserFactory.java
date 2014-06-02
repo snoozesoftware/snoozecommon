@@ -45,7 +45,6 @@ public final class VirtualClusterParserFactory
      * Creates a new virtual cluster parser.
      * 
      * @return              The virtual cluster parser
-     * @throws Exception
      */
     public static VirtualClusterParser newVirtualClusterParser()
     {

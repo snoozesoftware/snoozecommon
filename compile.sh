@@ -19,5 +19,4 @@
 # along with this program; if not, see <http://www.gnu.org/licenses>.
 #
 
-mvn package
-mvn install -Dmaven.test.skip=true
+mvn install -Dmaven.test.skip=false -Dmaven.javadoc.skip=true
