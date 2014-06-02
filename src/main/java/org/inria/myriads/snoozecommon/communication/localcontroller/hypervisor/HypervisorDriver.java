@@ -38,8 +38,11 @@ public enum HypervisorDriver
     vbox,
     /** OpenVZ. */
     openvz,
-    /** QEMU/KVM. */
+    /** pure QEMU. */
     qemu,
+    /** kvm */
+    kvm,
     /** VMware ESX. */
     esx,
+    
 }

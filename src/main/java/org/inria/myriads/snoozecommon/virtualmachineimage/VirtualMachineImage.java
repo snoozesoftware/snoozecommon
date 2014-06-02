@@ -1,5 +1,7 @@
 package org.inria.myriads.snoozecommon.virtualmachineimage;
 
+import org.inria.myriads.snoozecommon.globals.Globals;
+
 /**
  * 
  * Single image representation.
@@ -32,6 +34,10 @@ public class VirtualMachineImage
      */
     public VirtualMachineImage() 
     {
+        // default values
+        name_ = Globals.DEFAULT_INITIALIZATION;
+        path_ = Globals.DEFAULT_INITIALIZATION;
+        format_ = Globals.DEFAULT_DISK_FORMAT;
     }
 
     /**
