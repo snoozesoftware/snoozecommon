@@ -331,7 +331,27 @@ public final class RESTletBootstrapCommunicator
     @Override
     public VirtualClusterSubmissionResponse getVirtualClusterResponse(String taskIdentifier) 
     {
-        log_.error("Not implemented");
-        return null;
+        log_.debug("Requesting group leader from bootstrap node");
+        
+        ClientResource clientResource = null;
+        VirtualClusterSubmissionResponse virtualClusterResponse = null;
+        try
+        {
+            clientResource = createClientResource();
+            BootstrapAPI bootstrapResource = clientResource.wrap(BootstrapAPI.class); 
+            virtualClusterResponse = bootstrapResource.getVirtualClusterResponse(taskIdentifier);
+        }
+        catch (Exception exception)
+        {
+            log_.debug("Error while contacting bootstrap", exception);
+        }
+        finally
+        {
+            if (clientResource != null)
+            {
+                clientResource.release();
+            }
+        }
+        return virtualClusterResponse;    
     }
 }
