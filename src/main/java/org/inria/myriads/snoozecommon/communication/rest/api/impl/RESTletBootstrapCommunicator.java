@@ -331,7 +331,7 @@ public final class RESTletBootstrapCommunicator
     @Override
     public VirtualClusterSubmissionResponse getVirtualClusterResponse(String taskIdentifier) 
     {
-        log_.debug("Requesting group leader from bootstrap node");
+        log_.debug("Getting virtual cluster submission response");
         
         ClientResource clientResource = null;
         VirtualClusterSubmissionResponse virtualClusterResponse = null;
