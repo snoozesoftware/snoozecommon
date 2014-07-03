@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 2.1.6
+  - implement getVirtualCluster response in bootstrap API
+
 ## Version 2.1.5
   - fix javadoc errors.
   - enable qemu emulator.
